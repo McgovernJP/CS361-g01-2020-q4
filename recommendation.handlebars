@@ -35,7 +35,7 @@
       </li>
     </ul>
   </div>
-      <form class="form-inline">
+    <form class="form-inline">
      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
@@ -43,28 +43,64 @@
   <br>
 
   <!-- End NavBar -->
-  
+
+
+  <!-- weather Image Script -->
+  <script>
+    function weather_img() {
+      return "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/7326596361553239397-512.png"
+    }
+  </script>
+
   <br>
-  <div class="row">
+  <div class="form-group row">
     <div class="text-center col-sm-6">
       <div class="col-xs-1 center-block">
         <h2>Weather</h2>
       </div>
-      <img src="https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/7326596361553239397-512.png" class="img-fluid border rounded-circle border-success h-75" alt="Responsive image">
+      <img id="weather_image" src="" class="img-fluid border rounded-circle border-success h-75" alt="Responsive image">
+      <script>
+        document.getElementById("weather_image").src = weather_img()
+      </script>
+      <div>
+        <h1 id="city_weather"></h1>
+      </div>
+      <div class="d-flex justify-content-center">
+        <input id="city" class="form-control mr-sm-2 w-50 text-center d-flex justify-content-center"placeholder="Search City Name" aria-label="Search" default="Corvallis">
+        <button onclick="fetch_city()" id="city_button" class="btn btn-outline-success my-2 my-sm-0 justify-content-center">Search</button>
+      </div>
     </div>
     <div class="text-center col-sm-6">
       <div class="col-xs-1 center-block">
         <h2>Trail Difficulty</h2>
       </div>  
-      <img src="https://img.icons8.com/ios/452/mountain.png" class="img-fluid border rounded-circle border-success h-75" alt="Responsive image">
-      <div>
 
-      </div>
+      <img src="https://img.icons8.com/ios/452/mountain.png" class="img-fluid border rounded-circle border-success h-75" alt="Responsive image">
+
+      <div class="col-xs-1 center-block">
+        <h1>Hard</h1>
+      </div> 
     </div>
   </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
+  <script>
+    function fetch_city() {
+      var city = document.getElementById("city").value;
+      console.log(city)
+
+      var req = new XMLHttpRequest();
+      req.open("GET", "http://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid=6d9bda2548aa8225b2d4677e304abde7", false);
+      req.send(null);
+      var weather = JSON.parse(req.responseText)
+      var temp = weather.main.temp
+
+      document.getElementById("city_weather").textContent = city + ": " +  Math.round(temp * (9/5) - 459.67) + String.fromCharCode(176) + "F"
+    }
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   </body>
 </html>
