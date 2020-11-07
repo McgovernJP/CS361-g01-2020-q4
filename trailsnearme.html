@@ -46,8 +46,17 @@
   <!-- Start Your Pages Content Here -->
   <p>
     <a href="https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200968539-dd5a047534138b0cfaab99ad482a2492"> testing link </a>
-
+    
   </p>
+
+  <button onclick="getTrails()">Click me</button> 
+
+  <script>
+    function getTrails() {
+      $.getJSON('https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200968539-dd5a047534138b0cfaab99ad482a2492', function (data) {
+    });
+    }
+    </script>
 
   
 
