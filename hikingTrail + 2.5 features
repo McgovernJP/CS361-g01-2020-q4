@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <title>Trail Finder</title>
+      <style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+      
+      </style>
+  </head>
+  <body>
+
+  <!-- NavBar -->
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Trail Finder</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Trails Near Me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Trails For Me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Estimate Fitness Level</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Gear Recommendation</a>
+      </li>
+    </ul>
+  </div>
+      <form class="form-inline">
+     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </nav>
+
+  <!-- End NavBar -->
+
+  <!-- Start Your Pages Content Here -->
+
+
+  <div class="ml-4 mt-4 form-row align-items-center">
+    <div class="col-auto">
+      <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#exampleModal">Just For You!</button>
+      <div id="exampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Just For You</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeX">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="customSwitches" onclick="createMoods()">
+                  <label class="custom-control-label" for="customSwitches" >Off/On</label>
+                </div>
+                <select class="col-sm-4 mb-2 custom-select" id="moods" disabled style="display:none;">
+                  <option value="1">Easy and Chill</option>
+                  <option value="2" selected>It's My Level</option>
+                  <option value="3">Challenging</option>
+                </select>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success mb-2" id="saveMood">SAVE</button>
+      </div>
+    </div>
+  </div>
+</div>
+        
+        
+    </div>
+  </div>
+
+    <h4 class="mt-4 ml-4">Trail Recommendations</h4>
+
+  <table class="table table-hover ml-4 mt-4">
+  <thead>
+    <tr>
+      <th scope="col" style="display:none;">Lat</th>
+      <th scope="col" style="display:none;">Long</th>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Length</th>
+      <th scope="col">Location</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody id="nearByRow">
+      
+  </tbody>
+</table>
+
+
+  <!-- End Your Pages Content Here -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <script>
+
+
+         
+// request function calld with DOM content loader
+function updateCityCode(lat, long) {
+    var myAPIkey = '&key=200966756-47403fa118f56d99098ccde206950663';
+    var webAPI = "https://www.hikingproject.com/data/get-trails?lat="+lat+"&lon="+long+"&maxDistance=30";   
+    document.getElementById('getDirectionsButton').addEventListener('click', function(event){
+        //variable for request 
+        var req = new XMLHttpRequest();
+        req.open('GET', webAPI+myAPIkey, true);
+        req.send(null);
+        //register a listener on the request's load event for asynchr
+        req.addEventListener('load',function(){
+            if(req.status >= 200 && req.status < 400){
+                var response = JSON.parse(req.responseText);
+                let destLat = response["trails"][0]["latitude"];
+                let destLong = response["trails"][0]["longitude"];
+                let url = "https://www.google.com/maps/dir/"+destLat+","+destLong+"/"+lat+","+long+"/";
+                window.open(url, "_blank");
+                console.log(response["trails"][0]);
+            } else {
+                console.log("Error in network request: " + req.statusText);
+            }});
+        event.preventDefault();
+    });
+}
+      
+window.addEventListener('load',getLocation);
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } 
+}
+
+function showPosition(position) {
+    let long = position.coords.longitude;
+    let lat = position.coords.latitude;
+    console.log(lat, long);
+    printList(lat, long);
+}
+    
+    
+    
+function directions(lat, long){
+    var myAPIkey = '&key=200966756-47403fa118f56d99098ccde206950663';
+    var webAPI = "https://www.hikingproject.com/data/get-trails?lat="+lat+"&lon="+long+"&maxDistance=10";
+    document.getElementById("getDirections").addEventListener('click', function(event){
+        var myAPIkey = '&key=200966756-47403fa118f56d99098ccde206950663';
+        var webAPI = "https://www.hikingproject.com/data/get-trails?lat="+lat+"&lon="+long+"&maxDistance=10";
+        //variable for request 
+        var req = new XMLHttpRequest();
+        req.open('GET', webAPI+myAPIkey, true);
+        req.send(null);
+        //register a listener on the request's load event for asynchr
+        req.addEventListener('load',function(){
+            if(req.status >= 200 && req.status < 400){
+                var response = JSON.parse(req.responseText);
+                console.log(response["trails"]);
+                let destLat = null;
+                let destLong = null;
+                let url = "https://www.google.com/maps/dir/"+destLat+","+destLong+"/"+lat+","+long+"/";
+                window.open(url, "_blank");
+            } else {
+                console.log("Error in network request: " + req.statusText);
+            }});
+        event.preventDefault();
+    }); 
+}
+           
+function printList(lat, long){
+    var myAPIkey = '&key=200966756-47403fa118f56d99098ccde206950663';
+    var webAPI = "https://www.hikingproject.com/data/get-trails?lat="+lat+"&lon="+long+"&maxDistance=10&maxResults=30";
+    //variable for request 
+    var req = new XMLHttpRequest();
+    req.open('GET', webAPI+myAPIkey, true);
+    req.send(null);
+    //register a listener on the request's load event for asynchr
+    req.addEventListener('load',function(){
+        if(req.status >= 200 && req.status < 400){
+            var response = JSON.parse(req.responseText);
+            console.log(response["trails"]);
+            createList(lat, long, response["trails"]);
+        } else {
+            console.log("Error in network request: " + req.statusText);
+        }});
+}
+
+//function to create list on page load
+function createList(lat, long, list){
+    for (i=0; i < list.length; i++){
+        let destLat = list[i]["latitude"];
+        let destLong = list[i]["longitude"];
+        let url = "https://www.google.com/maps/dir/"+destLat+","+destLong+"/"+lat+","+long+"/";
+        var tbody = document.getElementById("nearByRow");
+        var tr = document.createElement("tr");
+        var td_lat = document.createElement("td");
+        td_lat.setAttribute("style", "display:none");
+        td_lat.innerHTML = list[i]["latitude"];
+        tr.appendChild(td_lat);
+        var td_long = document.createElement('td');
+        td_long.setAttribute("style", "display:none");
+        td_long.innerHTML = list[i]["longitude"];
+        tr.appendChild(td_long);
+        var th_number = document.createElement("th");
+        th_number.setAttribute("scope","row");
+        th_number.innerHTML = i+1;
+        tr.appendChild(th_number);
+        var td_name = document.createElement("td");
+        td_name.innerHTML = list[i]["name"];
+        tr.appendChild(td_name);
+        var td_length = document.createElement("td");
+        td_length.innerHTML = list[i]["length"];
+        tr.appendChild(td_length);
+        var td_location = document.createElement("td");
+        td_location.innerHTML = list[i]["location"];
+        tr.appendChild(td_location);
+        var td_directions = document.createElement('td');
+        var directions_button = document.createElement("button");
+        directions_button.innerHTML = "Directions";
+        directions_button.setAttribute("class", "btn btn-info" )
+        directions_button.setAttribute("onclick", "window.open('"+url+"', '_blank')");
+        directions_button.setAttribute("target", "_blank");
+        td_directions.appendChild(directions_button);
+        tr.appendChild(td_directions);
+        var td_recommend = document.createElement('td');
+        var recommend_button = document.createElement("button");
+        recommend_button.innerHTML = "Gear Recommendation";
+        recommend_button.setAttribute("class", "btn btn-info" )
+        td_recommend.appendChild(recommend_button);
+        tr.appendChild(td_recommend);
+        tbody.appendChild(tr);
+    }
+}
+
+        
+function createMoods(){
+    var checkbox = document.getElementById("customSwitches");
+    var select = document.getElementById("moods");
+    if (checkbox.checked == true){
+        select.removeAttribute("disabled");
+        select.removeAttribute("style");
+    } else {
+        select.setAttribute("disabled", "true");
+        select.setAttribute("style", "display:none;");
+    }
+}
+        
+
+
+  </script>
+      
+  </body>
+
+</html>
