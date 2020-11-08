@@ -44,15 +44,36 @@
   <!-- End NavBar -->
 
   <!-- Start Your Pages Content Here -->
-  <script>
-    function myFunction() {
-      document.getElementById("myData").innerHTML = "Hello World";
-    }
-    </script>
-    
-    <button onclick="myFunction()">Click me</button>
-    
-      <div id = "myData"></div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+  <script type = "text/javascript" language = "javascript">
+  var x = "";
+    $(document).ready(function() {
+ 
+       $("#driver").click(function(event){
+          $.getJSON('https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200968539-dd5a047534138b0cfaab99ad482a2492', function(jd) {
+             
+             console.log(JSON.stringify(jd));
+             for (i in jd.trails) {
+                x += jd.trails[i].name + "<br>";
+              }
+              document.getElementById("stage").innerHTML = x;
+          });
+       });
+   
+    });
+ </script>
+
+
+
+ <p>Click on the button to load result.html file:</p>
+
+ <div id = "stage" style = "background-color:#cc0;">
+    STAGE
+ </div>
+
+ <input type = "button" id = "driver" value = "Load Data" />
     
     
 
@@ -60,7 +81,6 @@
 
   <!-- End Your Pages Content Here -->
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
   </body>
