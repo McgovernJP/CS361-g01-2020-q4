@@ -1,3 +1,5 @@
+console.log(require('dotenv').config({debug: true}));
+
 var express = require('express');
 
 var app = express();
@@ -14,7 +16,7 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 33037);
 
-require('dotenv').config()
+
 
 
 app.get('/',function(req,res){
@@ -22,7 +24,7 @@ app.get('/',function(req,res){
 });
 
 app.get('/trailsnearme',function(req,res){
-  res.render('trailsnearme.handlebars', {title: 'Trails Near Me'})
+  res.render('trailsnearme.handlebars', {title: 'Trails Near Me', trail_api: process.env.TRAIL_API})
 });
 
 app.get('/personalized',function(req,res){
@@ -54,3 +56,5 @@ app.use(function(err, req, res, next){
 app.listen(app.get('port'), function(){
   //console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
+
+console.log(process.env.TRAIL_API);

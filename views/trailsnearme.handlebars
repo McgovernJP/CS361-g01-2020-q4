@@ -1,5 +1,4 @@
 
-
  
   <div class="container">
 
@@ -10,13 +9,13 @@
       var lon = -105.2519;
  
        $("#driver").click(function(event){
-          $.getJSON('https://www.hikingproject.com/data/get-trails?lat='+lat+'&lon='+lon+'&maxDistance=10&key=200968539-dd5a047534138b0cfaab99ad482a2492', function(jd) {
+          $.getJSON('https://www.hikingproject.com/data/get-trails?lat='+lat+'&lon='+lon+'&maxDistance=10&key={{trail_api}}', function(jd) {
              
             var sum = 0;
              console.log(JSON.stringify(jd));
              for (i in jd.trails) {
                sum++;
-                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].location +  "<button>Ein Button</button>""</td></tr>";
+                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].location + "</td></tr>";
               }
               document.getElementById("table").innerHTML = x;
 
