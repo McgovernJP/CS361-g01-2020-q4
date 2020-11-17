@@ -2,34 +2,17 @@
  
   <div class="container">
 
-  <script type = "text/javascript" language = "javascript">
-  var x = "<tr><td>"+ "#" +"</td><td>" + "Name" + "</td><td>"+"Length" +"</td><td>"+ "Location" + "</td></tr>";
-    $(document).ready(function() {
-      var lat = 40.0274;
-      var lon = -105.2519;
- 
-       $("#driver").click(function(event){
-          $.getJSON('https://www.hikingproject.com/data/get-trails?lat='+lat+'&lon='+lon+'&maxDistance=10&key={{trail_api}}', function(jd) {
-             
-            var sum = 0;
-             console.log(JSON.stringify(jd));
-             for (i in jd.trails) {
-               sum++;
-                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].location + "</td></tr>";
-              }
-              document.getElementById("table").innerHTML = x;
 
-          });
-       });
-   
-    });
- </script>
 
 <label for="location">Please enter a location: </label>
 <input type="text" id="location" name="location" required
-       minlength="4" maxlength="20" size="20">
+       minlength="4" maxlength="20" size="20" value = "">
 
        <input type = "button" id = "driver" value = "Get Trails" class="btn btn-primary">
+       <!--https://api.opencagedata.com/geocode/v1/json?q=PLACENAME&key=YOUR-API-KEY
+       console.log(JSON.stringify(jd)); -->
+       <p>{{oc_api}}</p> 
+       <p>{{trail_api}}</p> 
 
 
  <div id = "stage" class = "container">
@@ -39,6 +22,70 @@
    <!-- # name length location -->
    
 </table> 
+   <script type = "text/javascript" language = "javascript">
+
+    $(document).ready(function() {
+
+      
+      var lat = 40.0274;
+      var lng = -105.2519;
+
+      var latNew;
+      var lngNew;
+  
+ 
+       $("#driver").click(function(event){
+
+
+        $.get( "https://api.opencagedata.com/geocode/v1/google-v3-json?q=Boulder%2C%Colorado&key={{oc_api}}&pretty=1&no_annotations=1", function(kd) {
+            //console.log(JSON.stringify(kd));
+            //console.log(JSON.stringify(kd.results));
+            //console.log(JSON.stringify(kd.results..geometry.location.lat));
+            //results[0].geometry.location
+            //console.log(JSON.stringify(kd.results..geometry.location.lng));
+            //console.log(JSON.stringify(kd.results[0].geometry.location.lat));
+            //console.log(JSON.stringify(kd.results[0].geometry.location.lng));
+
+            latNew = JSON.stringify(kd.results[0].geometry.location.lat);
+            lngNew = JSON.stringify(kd.results[0].geometry.location.lng);
+
+            //lat = parseFloat(latNew);
+            //lng = parseFloat(lngNew);
+
+            //lat = str.replace("Microsoft", "W3Schools");
+            lat = (latNew.replace(/['"]+/g, ''));
+            lng = (lngNew.replace(/['"]+/g, ''));
+
+            console.log(lat);
+            console.log(lng);
+
+            console.log('lat='+lat+'&lon='+lng);
+
+
+         var x = "<tr><td>"+ "#" +"</td><td>" + "Name" + "</td><td>"+"Length" +"</td><td>"+ "Location" + "</td></tr>";
+         document.getElementById("table").innerHTML = "";
+          var myLoc = document.getElementById("location").value;
+
+            //console.log(latNew);
+            //console.log(lngNew);
+       
+
+          $.getJSON('https://www.hikingproject.com/data/get-trails?lat='+lat+'&lon='+lng+'&maxDistance=10&key={{trail_api}}', function(jd) {
+             
+            var sum = 0;
+             //console.log(JSON.stringify(jd));
+             for (i in jd.trails) {
+               sum++;
+                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button>Get Gear Recommendations</button>"+"</td></tr>";
+              }
+              document.getElementById("table").innerHTML = x;
+
+          });
+       });
+    });
+    });
+ </script>
+
 
  </div>
 

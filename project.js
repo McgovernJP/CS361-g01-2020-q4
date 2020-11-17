@@ -24,7 +24,7 @@ app.get('/',function(req,res){
 });
 
 app.get('/trailsnearme',function(req,res){
-  res.render('trailsnearme.handlebars', {title: 'Trails Near Me', trail_api: process.env.TRAIL_API})
+  res.render('trailsnearme.handlebars', {title: 'Trails Near Me', trail_api: process.env.TRAIL_API, oc_api: process.env.OPEN_CAGE})
 });
 
 app.get('/personalized',function(req,res){
