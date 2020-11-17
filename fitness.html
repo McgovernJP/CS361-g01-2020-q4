@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -45,23 +45,11 @@
 
   <h1>Determine Your Physical Fitness Level</h1>
   <p>Complete the below form to determine your physical fitness level.</p>
-  <form>
+  <form method='post'>
     <fieldset>
           <legend>Enter Information Below</legend>
           <label>Age:
             <input type = 'number' name = 'age'>
-          </label>
-          <br>
-          <br>
-          <label>Average minutes of exercise per day:
-            <select name = 'exercise'>
-                <option value='' selected>Select one</option>
-                <option value='none'>None</option>
-                <option value='30'><30 minutes</option>
-                <option value='60'>30-60 minutes</option>
-                <option value='90'>60-90 minutes</option>
-                <option value='most'>More than 90 minutes</option>
-            </select>
           </label>
           <br>
           <label>Gender
@@ -72,22 +60,41 @@
               </select>
             </label>
           <br>
-          <label>Average Hikes per week:</label>
-            <select name = 'hikes'>
+          <label>Describe your activity level:
+            <select id = 'exercise'>
                 <option value='' selected>Select one</option>
-                <option value='0'>0</option>
-                <option value='low'>1-2</option>
-                <option value='mid'>3-4</option>
-                <option value='high'>5+</option>
-              </select>
+                <option value='none'>None</option>
+                <option value='light'>Light exercise</option>
+                <option value='lmod'>Light to Moderate exercise</option>
+                <option value='mod'>Moderate exercise</option>
+                <option value='intense'>Intense exercise</option>
+            </select>
+          </label>
           <br>
-          <button type='submit' name='submit' id='submit'>Submit</button>
+          <button type='submit' onclick='getFit(); return false;'>Submit</button>
+          <br>
       </fieldset>
   </form>
+  <div id='result'></div>
   <!-- End Your Pages Content Here -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
+    <script language = "javascript">
+      function getFit() {
+      var fit = document.getElementById("exercise").value;
+      if (fit == 'none') {
+        document.getElementById('result').innerHTML = "Your level is: Novice";
+      } else if (fit == 'light') {
+        document.getElementById('result').innerHTML = "Your level is: Beginner"
+      } else if (fit == 'lmod') {
+        document.getElementById('result').innerHTML = "Your level is: Intermediate"
+      } else if (fit == 'mod') {
+        document.getElementById('result').innerHTML = "Your level is: Advanced"
+      } else if (fit == 'intense') {
+        document.getElementById('result').innerHTML = "Your level is: Expert"
+      }
+    }
+  </script>
   </body>
 </html>
