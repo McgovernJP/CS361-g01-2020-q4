@@ -16,7 +16,7 @@
              console.log(JSON.stringify(jd));
              for (i in jd.trails) {
                sum++;
-                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].location + "</td></tr>";
+                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].location +  "<button>Ein Button</button>""</td></tr>";
               }
               document.getElementById("table").innerHTML = x;
 
