@@ -11,8 +11,8 @@
        <input type = "button" id = "driver" value = "Get Trails" class="btn btn-primary">
        <!--https://api.opencagedata.com/geocode/v1/json?q=PLACENAME&key=YOUR-API-KEY
        console.log(JSON.stringify(jd)); -->
-       <p>{{oc_api}}</p> 
-       <p>{{trail_api}}</p> 
+       <!-- <p>{{oc_api}}</p> --> 
+       <!-- <p>{{trail_api}}</p> --> 
 
 
  <div id = "stage" class = "container">
@@ -35,9 +35,14 @@
   
  
        $("#driver").click(function(event){
+         var myLoc = document.getElementById("location").value;
+         console.log(myLoc);
+         //turn myLoc into correct form 
+         myNewLoc = (myLoc.replace(/ /g, '%2C%'));
+         myNextNewLoc = (myNewLoc.replace(/[',']+/g, ''));
+         console.log(myNextNewLoc);
 
-
-        $.get( "https://api.opencagedata.com/geocode/v1/google-v3-json?q=Boulder%2C%Colorado&key={{oc_api}}&pretty=1&no_annotations=1", function(kd) {
+        $.get( "https://api.opencagedata.com/geocode/v1/google-v3-json?q="+myNextNewLoc+"&key={{oc_api}}&pretty=1&no_annotations=1", function(kd) {
             //console.log(JSON.stringify(kd));
             //console.log(JSON.stringify(kd.results));
             //console.log(JSON.stringify(kd.results..geometry.location.lat));
@@ -52,7 +57,7 @@
             //lat = parseFloat(latNew);
             //lng = parseFloat(lngNew);
 
-            //lat = str.replace("Microsoft", "W3Schools");
+            
             lat = (latNew.replace(/['"]+/g, ''));
             lng = (lngNew.replace(/['"]+/g, ''));
 
@@ -64,7 +69,8 @@
 
          var x = "<tr><td>"+ "#" +"</td><td>" + "Name" + "</td><td>"+"Length" +"</td><td>"+ "Location" + "</td></tr>";
          document.getElementById("table").innerHTML = "";
-          var myLoc = document.getElementById("location").value;
+         
+          
 
             //console.log(latNew);
             //console.log(lngNew);
