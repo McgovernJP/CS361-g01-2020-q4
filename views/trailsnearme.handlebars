@@ -67,7 +67,7 @@
             console.log('lat='+lat+'&lon='+lng);
 
 
-         var x = "<tr><td>"+ "#" +"</td><td>" + "Name" + "</td><td>"+"Length" +"</td><td>"+ "Location" + "</td></tr>";
+         var x = "<tr><td>"+ "#" +"</td><td>" + "Name" + "</td><td>"+"Length" +"</td><td>"+ "Difficulty" +"</td><td>"+ "Location" + "</td></tr>";
          document.getElementById("table").innerHTML = "";
          
           
@@ -82,7 +82,7 @@
              //console.log(JSON.stringify(jd));
              for (i in jd.trails) {
                sum++;
-                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button>Get Gear Recommendations</button>"+"</td></tr>";
+                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].difficulty +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button>Get Gear Recommendations</button>"+"</td></tr>";
               }
               document.getElementById("table").innerHTML = x;
 
