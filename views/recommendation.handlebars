@@ -12,44 +12,14 @@
   </head>
   <body>
 
-  <!-- NavBar -->
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Trail Finder</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Trails Near Me</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Trails For Me</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Estimate Fitness Level</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Gear Recommendation</a>
-      </li>
-    </ul>
-  </div>
-    <form class="form-inline">
-     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </nav>
-  <br>
-
-  <!-- End NavBar -->
-
+    <!-- Nav Bar is here -->
 
   <script>
-    // Start weather Image
-    function weather_img() {
-      return "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/7326596361553239397-512.png"
-    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      weather_script(sessionStorage.getItem('location'));
+    });
+
   </script>
 
   <br>
@@ -72,7 +42,7 @@
       <!-- City Search -->
       <div class="d-flex justify-content-center">
         <input id="city" class="form-control mr-sm-2 w-50 text-center d-flex justify-content-center"placeholder="Search City Name" aria-label="Search" default="Corvallis">
-        <button onclick="main_script()" id="city_button" class="btn btn-outline-success my-2 my-sm-0 justify-content-center">Search</button>
+        <button onclick="weather_script()" id="city_button" class="btn btn-outline-success my-2 my-sm-0 justify-content-center">Search</button>
       </div>
     </div>
     <div class="text-center col-sm-6">
@@ -128,9 +98,7 @@
           </h4>
         </div>
         <div id="collapseOne2" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion2">
-          <div class="card-body">
-            The weather is lookin good. Bring a jacket if you want, but it is not required. [This is hard coded in. In the future it will be based on weather and trail difficulty]
-          </div>
+          <div id="jacket_rec" class="card-body"></div>
         </div>
       </div>
     </div>
@@ -148,9 +116,7 @@
           </h4>
         </div>
         <div id="collapseOne3" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion3">
-          <div class="card-body">
-            The weather is looking good. Bring medium thickness clothing, but be prepared to shed a layer as you get going. [This is hard coded in. In the future it will be based on weather and trail difficulty]
-          </div>
+          <div id="clothing_rec" class="card-body"></div>
         </div>
       </div>
     </div>
@@ -179,27 +145,46 @@
 
 
   <script>
+    
+    // Weather variables used for gear recs
+    var temp = null;
+    var name = null;
+    var condition = null;
+
     // Main script to gather weather information
-    function main_script() {
+    function weather_script(city_name) {
 
-      // Openweather API connections
-      var city = document.getElementById("city").value;
-
+      console.log(document.getElementById("city").value)
+      if(document.getElementById("city").value == "") {
+        var city = city_name
+      } else {
+        var city = document.getElementById("city").value
+      }
       var req = new XMLHttpRequest();
       req.open("GET", "http://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid=6d9bda2548aa8225b2d4677e304abde7", false);
       req.send(null);
       var overview = JSON.parse(req.responseText)
       console.log(overview)
-      var name = overview.name
-      var temp = overview.main.temp
-      var condition = overview.weather[0].main
+      name = overview.name
+      temp = Math.round(overview.main.temp * (9/5) - 459.67)
+      condition = overview.weather[0].main
 
       // Set text under picture
       document.getElementById("city_name").textContent = name
-      document.getElementById("city_temp").textContent = Math.round(temp * (9/5) - 459.67) + String.fromCharCode(176) + "F"
+      document.getElementById("city_temp").textContent = temp + String.fromCharCode(176) + "F"
       document.getElementById("city_weather").textContent = condition
 
-      // Set weather Image based on weather description
+      // Sets the picture description of the condtion 
+      set_weather_pic(condition)
+
+      //Need recommendations
+      get_boot_rec()
+      get_jacket_rec()
+      get_clothing_rec()
+      get_gear_rec()
+    }
+
+    function set_weather_pic(condition) {
       if(condition == "Clear"){
         document.getElementById("weather_image").src = "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/7326596361553239397-512.png"
       } else if(condition == "Clouds") {
@@ -218,6 +203,81 @@
         document.getElementById("weather_image").src = "data:image/png;base64,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"
       }
     }
+
+    // Functions for the recommendations. Each recommendation is pre-written and determined based on
+    // weather and trail difficulty
+
+    function get_boot_rec() {
+      
+    }
+    
+    function get_jacket_rec() {
+      if(temp <= 32 && (condition == "Rain" || condition == "Drizzle")) {
+        document.getElementById("jacket_rec").textContent = "Temperatures are around freezing and it looks like rain. Wear " +
+                                                            "a warm coat or parka that is water resistant. If you don't have " +
+                                                            "a water resistant coat we suggest bringing a poncho to go over " +
+                                                            "your coat."
+
+      } else if(temp <= 32) {
+        document.getElementById("jacket_rec").textContent = "Temperatures are at or below freezing. We suggest you bring " +
+                                                            "a warm coat or parka that is rated for cold temperatures. "
+
+      } else if(temp > 32 && temp < 50 && (condition == "Rain" || condition == "Drizzle")) {
+        document.getElementById("jacket_rec").textContent = "It is chilly and rainy out there today. Be sure to bring a decently " +
+                                                            "warm jacket that is water resistant. If you don't have a water " +
+                                                            "resistant jacket bring a light rain jacket to wear over your main " +
+                                                            "coat."
+
+      } else if(temp > 32 && temp < 50) {
+        document.getElementById("jacket_rec").textContent = "Be sure to bring a decently heavy jacket or coat. Temperatures " +
+                                                            "are above freezing so there is no need to bring a large parka, " +
+                                                            "but be prepared with a warm jacket."
+
+      } else if(condition == "Rain" || condition == "Drizzle") {
+        document.getElementById("jacket_rec").textContent = "Tut, tut, it looks like rain! Make sure that you bring a light rain " 
+                                                            "jacket."
+
+      } else if(temp >= 50 && temp < 60) {
+        document.getElementById("jacket_rec").textContent = "It isn't raining, but there is a chill in the air. You might want to " +
+                                                            "pack a light jacket."
+      
+      } else if(temp >= 60) {
+        document.getElementById("jacket_rec").textContent = "No need for a jacket today. The temperature is great and there is no " +
+                                                            "rain in the forecast."
+      } else {
+        document.getElementById("jacket_rec").textContent = "Error. No location data. Please select a city to see recommendations."
+      }
+    }
+
+    function get_clothing_rec() {
+      if(temp <= 32) {
+        document.getElementById("clothing_rec").textContent = "Prepare for below freezing temperatures. Wear layers " +
+                                                              "so that if the weather warms throughout the day you can " +
+                                                              "shed layers. Bring a hat and some gloves. Enjoy the hike!"
+      } else if(temp > 32 && temp < 50) {
+        document.getElementById("clothing_rec").textContent = "It's chilly out there. Be sure to be wearing warm clothes " +
+                                                              "and layers would be a good idea if it starts to warm up or " +
+                                                              "if the temperature starts to drop. It looks like it is just " +
+                                                              "above freezing so if you are out late temperatures could drop " +
+                                                              "back into freezing. Dress warm and have fun!"
+      } else if(temp >= 50 && temp < 60) {
+        document.getElementById("clothing_rec").textContent = "It's the perfect temperature for a rigorous hike. Be sure to " +
+                                                              "wear an outer layer, and you will be very comfortable."
+      } else if(temp >= 60 && temp < 80) {
+        document.getElementById("clothing_rec").textContent = "The temperature is perfect for a hike. You won't need anything " +
+                                                              "too thick, but maybe a long sleeve to start the day. The " +
+                                                              "temperature looks like it is perfect for shorts and a t-shirt."
+      } else if(temp >= 80) {
+        document.getElementById("clothing_rec").textContent = "It's going to be a hot one! Dress light and be prepared to be warm. "
+      } else {
+        document.getElementById("clothing_rec").textContent = "Error. No location data. Please select a city to see recommendations."
+      }
+    }
+
+    function get_gear_rec() {
+
+    }
+
   </script>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
