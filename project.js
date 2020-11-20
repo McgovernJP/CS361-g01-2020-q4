@@ -39,7 +39,9 @@ app.get('/recommendation',function(req,res){
   res.render('recommendation.handlebars', {title: 'Gear Recommendation'})
 });
 
-
+app.get('/directions',function(req,res){
+  res.render('directions.handlebars', {title: 'Directions'})
+});
 
 app.use(function(req,res){
   res.status(404);

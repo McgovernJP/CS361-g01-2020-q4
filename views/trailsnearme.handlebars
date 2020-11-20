@@ -22,6 +22,16 @@
    <!-- # name length location -->
    
 </table> 
+<script type = "text/javascript" language = "javascript">
+function getDirections(scriptLat, scriptLng){
+  console.log(scriptLat);
+  console.log(scriptLng);
+  location.href = "/directions";
+}
+
+</script>
+
+
    <script type = "text/javascript" language = "javascript">
 
     $(document).ready(function() {
@@ -81,8 +91,18 @@
             var sum = 0;
              //console.log(JSON.stringify(jd));
              for (i in jd.trails) {
+               var tempLat;
+               var tempLng;
+
+               tempLat = jd.trails[i].latitude;
+               tempLng = jd.trails[i].longitude;
+
+               var myLocString = tempLat+", "+tempLng;
+
+              //console.log(tempLat);
+
                sum++;
-                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].difficulty +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button>Get Gear Recommendations</button>"+"</td></tr>";
+                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].difficulty +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button onclick='getDirections("+myLocString+")'>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button>Get Gear Recommendations</button>"+"</td></tr>";
               }
               document.getElementById("table").innerHTML = x;
 
