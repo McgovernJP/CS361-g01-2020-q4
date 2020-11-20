@@ -24,9 +24,28 @@
 </table> 
 <script type = "text/javascript" language = "javascript">
 function getDirections(scriptLat, scriptLng){
-  console.log(scriptLat);
-  console.log(scriptLng);
+  
+  sessionStorage.setItem('trailLat', scriptLat);
+  sessionStorage.setItem('trailLng', scriptLng);
+  //console.log(sessionStorage.getItem('trailLat'));
+  //console.log(sessionStorage.getItem('trailLng'));
   location.href = "/directions";
+}
+
+</script>
+
+<script type = "text/javascript" language = "javascript">
+function getGear(scriptLat, scriptLng, scriptDiff){
+  
+  sessionStorage.setItem('trailLat', scriptLat);
+  console.log(sessionStorage.getItem('trailLat'));
+  sessionStorage.setItem('trailLng', scriptLng);
+  console.log(sessionStorage.getItem('trailLng'));
+  sessionStorage.setItem('trailDiff', scriptDiff);
+  
+  
+  //console.log(sessionStorage.getItem('trailDiff'));
+  location.href = "/recommendations";
 }
 
 </script>
@@ -96,13 +115,16 @@ function getDirections(scriptLat, scriptLng){
 
                tempLat = jd.trails[i].latitude;
                tempLng = jd.trails[i].longitude;
+               tempDiff = jd.trails[i].difficulty
 
                var myLocString = tempLat+", "+tempLng;
 
-              //console.log(tempLat);
+               var myLocDiffString = myLocString+", "+ "\""+tempDiff+"\"";
+
+              console.log(myLocDiffString);
 
                sum++;
-                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].difficulty +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button onclick='getDirections("+myLocString+")'>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button>Get Gear Recommendations</button>"+"</td></tr>";
+                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].difficulty +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button onclick='getDirections("+myLocString+")'>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button onclick='getGear("+myLocDiffString+")'>Get Gear Recommendations</button>"+"</td></tr>";
               }
               document.getElementById("table").innerHTML = x;
 
