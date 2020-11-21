@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -11,9 +11,7 @@
     <title>Trail Finder</title>
   </head>
   <body>
-
-  <!-- NavBar -->
-
+    
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Trail Finder</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,13 +23,7 @@
         <a class="nav-link" href="#">Trails Near Me</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Trails For Me</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Estimate Fitness Level</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Gear Recommendation</a>
+        <a class="nav-link" href="#">About</a>
       </li>
     </ul>
   </div>
@@ -47,33 +39,37 @@
   <p>Complete the below form to determine your physical fitness level.</p>
   <form method='post'>
     <fieldset>
-          <legend>Enter Information Below</legend>
-          <label>Age:
-            <input type = 'number' name = 'age'>
-          </label>
-          <br>
-          <label>Gender
-            <select name = 'gender'>
-                  <option value='' selected>Select one</option>
-                  <option value='female'>Female</option>
-                  <option value='male'>Male</option>
-              </select>
-            </label>
-          <br>
-          <label>Describe your activity level:
-            <select id = 'exercise'>
-                <option value='' selected>Select one</option>
-                <option value='none'>None</option>
-                <option value='light'>Light exercise</option>
-                <option value='lmod'>Light to Moderate exercise</option>
-                <option value='mod'>Moderate exercise</option>
-                <option value='intense'>Intense exercise</option>
-            </select>
-          </label>
-          <br>
-          <button type='submit' onclick='getFit(); return false;'>Submit</button>
-          <br>
-      </fieldset>
+      <legend>Enter Information Below</legend>
+      <label>Name:
+        <input type = 'text' name = 'name'>
+      </label>
+      <br>
+      <label>Age:
+        <input type = 'number' name = 'age'>
+      </label>
+      <br>
+      <label>Gender
+        <select name = 'gender'>
+              <option value='' selected>Select one</option>
+              <option value='female'>Female</option>
+              <option value='male'>Male</option>
+          </select>
+        </label>
+      <br>
+      <label>Describe your activity level:
+        <select id = 'exercise'>
+            <option value='' selected>Select one</option>
+            <option value='none'>None</option>
+            <option value='light'>Light exercise</option>
+            <option value='lmod'>Light to Moderate exercise</option>
+            <option value='mod'>Moderate exercise</option>
+            <option value='intense'>Intense exercise</option>
+        </select>
+      </label>
+      <br>
+      <button type='submit' class="btn btn-info" onclick='getFit(); return false;'>Submit</button>
+      <br>
+    </fieldset>
   </form>
   <div id='result'></div>
   <!-- End Your Pages Content Here -->
@@ -85,15 +81,20 @@
       var fit = document.getElementById("exercise").value;
       if (fit == 'none') {
         document.getElementById('result').innerHTML = "Your level is: Novice";
+        var level = "Novice"
       } else if (fit == 'light') {
-        document.getElementById('result').innerHTML = "Your level is: Beginner"
+        document.getElementById('result').innerHTML = "Your level is: Beginner";
+        var level = "Beginner";
       } else if (fit == 'lmod') {
-        document.getElementById('result').innerHTML = "Your level is: Intermediate"
+        document.getElementById('result').innerHTML = "Your level is: Intermediate";
+        var level = "Intermediate";
       } else if (fit == 'mod') {
-        document.getElementById('result').innerHTML = "Your level is: Advanced"
+        document.getElementById('result').innerHTML = "Your level is: Advanced";
+        var level = "Advanced";
       } else if (fit == 'intense') {
-        document.getElementById('result').innerHTML = "Your level is: Expert"
-      }
+        document.getElementById('result').innerHTML = "Your level is: Expert";
+        var level = "Expert";
+      } sessionStorage.setItem('fitlevel', level)
     }
   </script>
   </body>
