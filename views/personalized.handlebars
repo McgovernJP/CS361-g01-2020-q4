@@ -15,9 +15,10 @@
 
 <label for="location">Please enter a location: </label>
 <input type="text" id="location" name="location" required
-       minlength="4" maxlength="20" size="20" value = "">
+       minlength="4" maxlength="20" size="20" value = ""><br>
 
-       <input type = "button" id = "driver" value = "Get Trails" class="btn btn-primary">
+       <input type = "button" id = "driver" value = "Get Trails nearby" class="btn btn-primary">
+       <input type = "button" id = "driver2" value = "Get Trails for my fitnmess level" class="btn btn-primary">
        <!--https://api.opencagedata.com/geocode/v1/json?q=PLACENAME&key=YOUR-API-KEY
        console.log(JSON.stringify(jd)); -->
        <!-- <p>{{oc_api}}</p> --> 
@@ -72,7 +73,7 @@ function getGear(scriptLat, scriptLng, scriptDiff){
       var lngNew;
   
  
-       $("#driver").click(function(event){
+       $("#driver2").click(function(event){
          var myLoc = document.getElementById("location").value;
          var myDiff = document.getElementById("diffSelect").value;
          //console.log(myLoc);
@@ -170,6 +171,75 @@ function getGear(scriptLat, scriptLng, scriptDiff){
           });
        });
     });
+       $("#driver").click(function(event){
+         var myLoc = document.getElementById("location").value;
+         console.log(myLoc);
+         //turn myLoc into correct form 
+         myNewLoc = (myLoc.replace(/ /g, '%2C%'));
+         myNextNewLoc = (myNewLoc.replace(/[',']+/g, ''));
+         console.log(myNextNewLoc);
+
+        $.get( "https://api.opencagedata.com/geocode/v1/google-v3-json?q="+myNextNewLoc+"&key={{oc_api}}&pretty=1&no_annotations=1", function(kd) {
+            //console.log(JSON.stringify(kd));
+            //console.log(JSON.stringify(kd.results));
+            //console.log(JSON.stringify(kd.results..geometry.location.lat));
+            //results[0].geometry.location
+            //console.log(JSON.stringify(kd.results..geometry.location.lng));
+            //console.log(JSON.stringify(kd.results[0].geometry.location.lat));
+            //console.log(JSON.stringify(kd.results[0].geometry.location.lng));
+
+            latNew = JSON.stringify(kd.results[0].geometry.location.lat);
+            lngNew = JSON.stringify(kd.results[0].geometry.location.lng);
+
+            //lat = parseFloat(latNew);
+            //lng = parseFloat(lngNew);
+
+            
+            lat = (latNew.replace(/['"]+/g, ''));
+            lng = (lngNew.replace(/['"]+/g, ''));
+
+            console.log(lat);
+            console.log(lng);
+
+            console.log('lat='+lat+'&lon='+lng);
+
+
+         var x = "<tr><td>"+ "#" +"</td><td>" + "Name" + "</td><td>"+"Length" +"</td><td>"+ "Difficulty" +"</td><td>"+ "Location" + "</td></tr>";
+         document.getElementById("table").innerHTML = "";
+         
+          
+
+            //console.log(latNew);
+            //console.log(lngNew);
+       
+
+          $.getJSON('https://www.hikingproject.com/data/get-trails?lat='+lat+'&lon='+lng+'&maxDistance=10&key={{trail_api}}', function(jd) {
+             
+            var sum = 0;
+             //console.log(JSON.stringify(jd));
+             for (i in jd.trails) {
+               var tempLat;
+               var tempLng;
+
+               tempLat = jd.trails[i].latitude;
+               tempLng = jd.trails[i].longitude;
+               tempDiff = jd.trails[i].difficulty
+
+               var myLocString = tempLat+", "+tempLng;
+
+               var myLocDiffString = myLocString+", "+ "\""+tempDiff+"\"";
+
+              console.log(myLocDiffString);
+
+               sum++;
+                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+jd.trails[i].difficulty +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button onclick='getDirections("+myLocString+")'>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button onclick='getGear("+myLocDiffString+")'>Get Gear Recommendations</button>"+"</td></tr>";
+              }
+              document.getElementById("table").innerHTML = x;
+
+          });
+       });
+    });
+
     });
  </script>
 
