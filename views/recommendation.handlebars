@@ -17,7 +17,7 @@
   <script>
 
     document.addEventListener("DOMContentLoaded", function() {
-      weather_script(sessionStorage.getItem('location'));
+      weather_script();
     });
 
   </script>
@@ -29,21 +29,20 @@
         <h2>Weather</h2>
       </div>
       <img id="weather_image" src="" class="img-fluid border rounded-circle border-success h-75" alt="Responsive image">
-      <script>
-        // Get initial weather image
-        document.getElementById("weather_image").src = weather_img()
-      </script>
+
       <!-- City weather info filled in by script -->
       <div>
         <h1 id="city_name"></h1>
         <h1 id="city_temp"></h1>
         <h1 id="city_weather"></h1>
+        <h1 id="latitude"></h1>
+        <h1 id="longitude"></h1>
       </div>
-      <!-- City Search -->
-      <div class="d-flex justify-content-center">
+      <!-- City Search **Removed because location will be sent from previous page -->
+      {{!-- <div class="d-flex justify-content-center">
         <input id="city" class="form-control mr-sm-2 w-50 text-center d-flex justify-content-center"placeholder="Search City Name" aria-label="Search" default="Corvallis">
-        <button onclick="weather_script()" id="city_button" class="btn btn-outline-success my-2 my-sm-0 justify-content-center">Search</button>
-      </div>
+        <button onclick="//weather_script()" id="city_button" class="btn btn-outline-success my-2 my-sm-0 justify-content-center">Search</button>
+      </div> --}}
     </div>
     <div class="text-center col-sm-6">
       <div class="col-xs-1 center-block">
@@ -57,6 +56,8 @@
       </div> 
     </div>
   </div>
+  <br>
+  <br>
   <br>
   <br>
   <br>
@@ -150,29 +151,36 @@
     var temp = null;
     var name = null;
     var condition = null;
+    var trailLat = sessionStorage.getItem("trailLat")
+    var trailLong = sessionStorage.getItem("trailLong")
+    var trailDiff = sessionStorage.getItem("trailDiff")
 
     // Main script to gather weather information
-    function weather_script(city_name) {
+    function weather_script() {
 
-      console.log(document.getElementById("city").value)
-      if(document.getElementById("city").value == "") {
-        var city = city_name
-      } else {
-        var city = document.getElementById("city").value
-      }
+      console.log(trailLat)
+      console.log(trailLong)
+
       var req = new XMLHttpRequest();
-      req.open("GET", "http://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid=6d9bda2548aa8225b2d4677e304abde7", false);
+      //req.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat=39.7209&lon=-104.96&appid=6d9bda2548aa8225b2d4677e304abde7", false);
+      req.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat="+ trailLat + "&lon="+ trailLong +"&appid=6d9bda2548aa8225b2d4677e304abde7", false);
+      //req.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=denver&appid=6d9bda2548aa8225b2d4677e304abde7", false);
       req.send(null);
       var overview = JSON.parse(req.responseText)
       console.log(overview)
       name = overview.name
+      console.log(name)
       temp = Math.round(overview.main.temp * (9/5) - 459.67)
       condition = overview.weather[0].main
+      latitude = overview.coord.lat
+      longitude = overview.coord.lon
 
       // Set text under picture
       document.getElementById("city_name").textContent = name
       document.getElementById("city_temp").textContent = temp + String.fromCharCode(176) + "F"
       document.getElementById("city_weather").textContent = condition
+      document.getElementById("latitude").textContent = "Lat: " + latitude + String.fromCharCode(176)
+      document.getElementById("longitude").textContent = "Long: " + longitude + String.fromCharCode(176)
 
       // Sets the picture description of the condtion 
       set_weather_pic(condition)
