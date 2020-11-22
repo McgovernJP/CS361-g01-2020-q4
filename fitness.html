@@ -35,20 +35,20 @@
 
   <!-- End NavBar -->
 
-  <h1>Determine Your Physical Fitness Level</h1>
-  <p>Complete the below form to determine your physical fitness level.</p>
+  <h1 class="ml-4">Determine Your Physical Fitness Level</h1>
+  <p class="mt-2 ml-4">Complete the below form to determine your physical fitness level.</p>
   <form method='post'>
     <fieldset>
-      <legend>Enter Information Below</legend>
-      <label>Name:
-        <input type = 'text' name = 'name'>
+      <legend class="mt-4 ml-4">Enter Information Below</legend>
+      <label class="mt-4 ml-4">Name:
+        <input type='text' name='name' id='name'>
       </label>
       <br>
-      <label>Age:
-        <input type = 'number' name = 'age'>
+      <label class="mt-2 ml-4">Age:
+        <input type='number' name='age'>
       </label>
       <br>
-      <label>Gender
+      <label class="mt-2 ml-4">Gender
         <select name = 'gender'>
               <option value='' selected>Select one</option>
               <option value='female'>Female</option>
@@ -56,7 +56,7 @@
           </select>
         </label>
       <br>
-      <label>Describe your activity level:
+      <label class="mt-2 ml-4">Describe your activity level:
         <select id = 'exercise'>
             <option value='' selected>Select one</option>
             <option value='none'>None</option>
@@ -67,35 +67,16 @@
         </select>
       </label>
       <br>
-      <button type='submit' class="btn btn-info" onclick='getFit(); return false;'>Submit</button>
+      <button type='submit' class="btn btn-info mt-2 ml-4" onclick='getFit(); return false;'>Submit</button>
       <br>
     </fieldset>
   </form>
-  <div id='result'></div>
+  <div id='result' class="mt-4 ml-4"></div>
   <!-- End Your Pages Content Here -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <script language = "javascript">
-      function getFit() {
-      var fit = document.getElementById("exercise").value;
-      if (fit == 'none') {
-        document.getElementById('result').innerHTML = "Your level is: Novice";
-        var level = "Novice"
-      } else if (fit == 'light') {
-        document.getElementById('result').innerHTML = "Your level is: Beginner";
-        var level = "Beginner";
-      } else if (fit == 'lmod') {
-        document.getElementById('result').innerHTML = "Your level is: Intermediate";
-        var level = "Intermediate";
-      } else if (fit == 'mod') {
-        document.getElementById('result').innerHTML = "Your level is: Advanced";
-        var level = "Advanced";
-      } else if (fit == 'intense') {
-        document.getElementById('result').innerHTML = "Your level is: Expert";
-        var level = "Expert";
-      } sessionStorage.setItem('fitlevel', level)
-    }
+    <script type="text/javascript" src="fitness.js"></script>
   </script>
   </body>
 </html>
