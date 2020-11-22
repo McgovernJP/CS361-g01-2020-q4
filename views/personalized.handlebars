@@ -4,8 +4,8 @@
 
 
 
-<label for="diffSelect">Please select a difficulty: </label>
-
+<label for="diffSelect">Filter trails?: </label>
+<!--
 <select name="diffSelect" id="diffSelect">
   <option value="all">all</option>
   <option value="easy">easy</option>
@@ -14,6 +14,12 @@
   <option value="intermediate/difficult">intermediate/difficult</option>
   <option value="hard">hard</option>
   <option value="very hard">very hard</option>
+</select> 
+-->
+
+<select name="forMe" id="forMe">
+  <option value="all">all trails near by</option>
+  <option value="easy">filtered for fitness level</option>
 </select> 
 
 <!--
@@ -86,11 +92,14 @@ function getGear(scriptLat, scriptLng, scriptDiff){
        $("#driver2").click(function(event){
          //var myLoc = document.getElementById("location").value;
          var myLoc = (sessionStorage.getItem('locGlobal'));
-         var myDiff = document.getElementById("diffSelect").value;
-
+         //var myDiff = document.getElementById("diffSelect").value;
+         //console.log(sessionStorage.getItem('fitlevel'));
+         var myDiff = (sessionStorage.getItem('fitlevel'));
          myNewLoc = (myLoc.replace(/ /g, '%2C%'));
          myNextNewLoc = (myNewLoc.replace(/[',']+/g, ''));
-         console.log(sessionStorage.getItem('fitlevel'));
+         var forMeorAll = document.getElementById("forMe").value;
+         //console.log(forMeorAll);
+         
          //console.log(myNextNewLoc);
 
         $.get( "https://api.opencagedata.com/geocode/v1/google-v3-json?q="+myNextNewLoc+"&key={{oc_api}}&pretty=1&no_annotations=1", function(kd) {
@@ -145,7 +154,8 @@ function getGear(scriptLat, scriptLng, scriptDiff){
             
                //console.log(jd.trails[i].difficulty);
                //console.log(tDiff);
-               if(tDiff == myDiff || myDiff == 'all'){
+               
+               if(tDiff == myDiff || forMeorAll == 'all'){
                  //console.log('match');
                
                var tempLat;
