@@ -28,13 +28,53 @@
             <option value='light'>Light exercise</option>
             <option value='lmod'>Light to Moderate exercise</option>
             <option value='mod'>Moderate exercise</option>
+            <option value='intense1'>Moderate to Intense</option>
             <option value='intense'>Intense exercise</option>
         </select>
       </label>
       <br>
-      <button type='button' class="btn btn-info mt-2 ml-4" id='enter'>Submit</button>
+      <button type='button' class="btn btn-info mt-2 ml-4" id='driver'>Submit</button>
       <br>
     </fieldset>
   </form>
   <div id='result' class="mt-4 ml-4"></div>
+  <script type="text/javascript" src="fitness.js"></script>
+   <script type = "text/javascript" language = "javascript">
+
+    $(document).ready(function() {
+      $("#driver").click(function(event){
+          //var locData = document.getElementById("myID").value;
+          //importing script
+
+          	var fit = document.getElementById("exercise").value;
+	          if (fit == 'none') {
+            document.getElementById('result').innerHTML = "Your level is: Novice";
+            var level = "easy"
+            } else if (fit == 'light') {
+            document.getElementById('result').innerHTML = "Your level is: Beginner";
+            var level = "easy/intermediate";
+            } else if (fit == 'lmod') {
+            document.getElementById('result').innerHTML = "Your level is: Intermediate";
+            var level = "Intermediate";
+            } else if (fit == 'mod') {
+            document.getElementById('result').innerHTML = "Your level is: Advanced";
+            var level = "intermediate/difficult";
+            } else if (fit == 'intense1') {
+            document.getElementById('result').innerHTML = "Your level is: Very Advanced";
+            var level = "hard";
+            } else if (fit == 'intense') {
+            document.getElementById('result').innerHTML = "Your level is: Expert";
+            var level = "very hard";
+            } sessionStorage.setItem('fitlevel', level);
+
+          //done importing
+
+
+          //sessionStorage.setItem('fitlevel', "testing");
+
+          location.href = "/personalized";
+        });
+      });
+      </script>
+
   <!-- End Your Pages Content Here -->

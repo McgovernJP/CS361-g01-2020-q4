@@ -16,11 +16,13 @@
 	document.getElementById('result').innerHTML = "Your level is: Expert";
 	var level = "Expert";
 	} sessionStorage.setItem('fitlevel', level);
+	console.log(fitlevel);
 };
 
 function getName() {
 	var name = document.getElementById('name').value;
 	sessionStorage.setItem('userName', name);
+	
 };
 
 document.getElementById('enter').addEventListener('click', getFit);

@@ -90,7 +90,7 @@ function getGear(scriptLat, scriptLng, scriptDiff){
 
          myNewLoc = (myLoc.replace(/ /g, '%2C%'));
          myNextNewLoc = (myNewLoc.replace(/[',']+/g, ''));
-         //console.log(sessionStorage.getItem('fitlevel'));
+         console.log(sessionStorage.getItem('fitlevel'));
          //console.log(myNextNewLoc);
 
         $.get( "https://api.opencagedata.com/geocode/v1/google-v3-json?q="+myNextNewLoc+"&key={{oc_api}}&pretty=1&no_annotations=1", function(kd) {
