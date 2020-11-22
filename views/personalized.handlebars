@@ -16,6 +16,7 @@
   <option value="very hard">very hard</option>
 </select> 
 
+<!--
 <label for="location">Please enter a location: </label>
 <input type="text" id="location" name="location" required
        minlength="4" maxlength="20" size="20" value = ""><br>
@@ -25,6 +26,7 @@
        <input type="checkbox" id="filter" name="filter" value="filterMe">
         <label for="filter"> Limit results based off fitness level</label>
         -->
+        
        <input type = "button" id = "driver2" value = "Display Results" class="btn btn-primary">
 
 
@@ -82,7 +84,8 @@ function getGear(scriptLat, scriptLng, scriptDiff){
   
  
        $("#driver2").click(function(event){
-         var myLoc = document.getElementById("location").value;
+         //var myLoc = document.getElementById("location").value;
+         var myLoc = (sessionStorage.getItem('locGlobal'));
          var myDiff = document.getElementById("diffSelect").value;
 
          myNewLoc = (myLoc.replace(/ /g, '%2C%'));

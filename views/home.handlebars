@@ -15,10 +15,12 @@
           <form>
             <div class="form-row">
               <div class="col-12 col-md-9 mb-2 mb-md-0">
-                <input type="text" class="form-control form-control-lg" placeholder="Enter your city, state...">
+                <input type="text" class="form-control form-control-lg" id = "myID" placeholder="Enter your city, state...">
+                <!-- <input type="text" id="location" name="location" required minlength="4" maxlength="20" size="20" value = ""><br> -->
               </div>
               <div class="col-12 col-md-3">
-                <button type="submit" class="mb-4 btn btn-block btn-lg btn-primary">Find Trails!</button>
+               <!-- <button type="submit" class="mb-4 btn btn-block btn-lg btn-primary">Find Trails!</button> -->
+                <input type = "button" id = "driver" value = "Find Trails!" class="mb-4 btn btn-block btn-lg btn-primary">
               </div>
             </div>
           </form>
@@ -63,5 +65,19 @@
       </div>
     </div>
   </section>
+
+   <script type = "text/javascript" language = "javascript">
+
+    $(document).ready(function() {
+      $("#driver").click(function(event){
+          var locData = document.getElementById("myID").value;
+          sessionStorage.setItem('locGlobal', locData);
+
+          //console.log("buttonpress");
+          //console.log(locData);
+          location.href = "/personalized";
+        });
+      });
+      </script>
 
   <!-- End Your Pages Content Here -->
