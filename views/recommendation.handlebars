@@ -204,26 +204,26 @@
     // weather and trail difficulty
 
     function get_boot_rec() {
-      if(trailDiff == "green") {
+      if(trailDiff == "easy") {
         document.getElementById("boot_button").textContent = "Running Shoes"
         document.getElementById("boot_rec").textContent = "This is an easier trail so we suggest running shoes or any other sor of " +
                                                           "comfortable walking shoes."
-      } else if(trailDiff == "greenBlue") {
+      } else if(trailDiff == "easy/intermediate") {
         document.getElementById("boot_button").textContent = "Running Shoes"
         document.getElementById("boot_rec").textContent = "This is an easy to intermediate trail so we suggest running shoes or " +
                                                           "light hiking shoes."
-      } else if(trailDiff == "blue") {
+      } else if(trailDiff == "intermediate") {
         document.getElementById("boot_button").textContent = "Light Hiking Shoes"
         document.getElementById("boot_rec").textContent = "This is an intermediate trail so we suggest light hiking sheos."
-      } else if(trailDiff == "blueBlack") {
+      } else if(trailDiff == "intermediate/difficult") {
         document.getElementById("boot_button").textContent = "Hiking Shoes or Boots"
         document.getElementById("boot_rec").textContent = "This trail is starting to get difficult. We suggest wearing hiking shoes " +
                                                           "or boots."
-      } else if(trailDiff == "black") {
+      } else if(trailDiff == "hard") {
         document.getElementById("boot_button").textContent = "Hiking Boots"
         document.getElementById("boot_rec").textContent = "This trail is difficult so we suggest hiking boots with good tread and " +
                                                           "good ankle support."
-      } else if(trailDiff == "dblack") {
+      } else if(trailDiff == "very hard") {
         document.getElementById("boot_button").textContent = "Heavy Hiking Boots"
         document.getElementById("boot_rec").textContent = "This trail is very difficult. Be sure to wear hiking boots with a lot of " +
                                                           "support and tread."
@@ -311,28 +311,28 @@
     }
 
     function get_gear_rec() {
-      if(trailDiff == "green") {
+      if(trailDiff == "easy") {
         document.getElementById("gear_button").textContent = "No Extra Gear"
         document.getElementById("gear_rec").textContent = "This is an easy trail so no extra gear will be required. As always bring " +
                                                           "water and snacks."
-      } else if(trailDiff == "greenBlue") {
+      } else if(trailDiff == "easy/intermediate") {
         document.getElementById("gear_button").textContent = "No Extra Gear"
         document.getElementById("gear_rec").textContent = "This trail is easy to intermediate. No extra gear will be required. Make " +
                                                           "sure to bring extra water and snacks."
-      } else if(trailDiff == "blue") {
+      } else if(trailDiff == "intermediate") {
         document.getElementById("gear_button").textContent = "Trekking Poles"
         document.getElementById("gear_rec").textContent = "This is an intermediate trail. The only extra equipment that is recommended " +
                                                           "is a trekking pole. As always bring water and snacks."
-      } else if(trailDiff == "blueBlack") {
+      } else if(trailDiff == "intermediate/difficult") {
         document.getElementById("gear_button").textContent = "Trekking Poles"
         document.getElementById("gear_rec").textContent = "This trail is a little more difficult. Be sure to bring a trekking pole " +
                                                              "for stability. Bring food and water."
-      } else if(trailDiff == "black") {
+      } else if(trailDiff == "hard") {
         document.getElementById("gear_button").textContent = "Hiking Pack"
         document.getElementById("gear_rec").textContent = "This trail is difficult. Make sure to bring trekking poles, a good pack " +
                                                           "that distributes its weight evenly, and a first aid kit. You will need " +
                                                           "extra food and water."
-      } else if(trailDiff == "dblack") {
+      } else if(trailDiff == "very hard") {
         document.getElementById("gear_button").textContent = "Extreme Gear"
         document.getElementById("gear_rec").textContent = "This trail is very difficult. Make sure to bring a good pack that " +
                                                           "distributes its weight evenly. You will also want trekking poles and " +
@@ -346,17 +346,17 @@
     }
 
     function set_trail_diff() {
-      if(trailDiff == "green") {
+      if(trailDiff == "easy") {
         document.getElementById("trail_diff").textContent = "Easy"
-      } else if(trailDiff == "greenBlue") {
+      } else if(trailDiff == "easy/intermediate") {
         document.getElementById("trail_diff").textContent = "Easy/Intermediate"
-      } else if(trailDiff == "blue") {
+      } else if(trailDiff == "intermediate") {
         document.getElementById("trail_diff").textContent = "Intermediate"
-      } else if(trailDiff == "blueBlack") {
+      } else if(trailDiff == "intermediate/difficult") {
         document.getElementById("trail_diff").textContent = "Intermediate/Difficult"
-      } else if(trailDiff == "black") {
+      } else if(trailDiff == "hard") {
         document.getElementById("trail_diff").textContent = "Difficult"
-      } else if(trailDiff == "dblack") {
+      } else if(trailDiff == "very hard") {
         document.getElementById("trail_diff").textContent = "Very Difficult"
       } else {
         document.getElementById("trail_diff").textContent = ""
