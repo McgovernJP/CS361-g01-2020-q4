@@ -1,4 +1,4 @@
-function getFit() {
+ function getFit() {
 	var fit = document.getElementById("exercise").value;
 	if (fit == 'none') {
 	document.getElementById('result').innerHTML = "Your level is: Novice";
@@ -16,6 +16,12 @@ function getFit() {
 	document.getElementById('result').innerHTML = "Your level is: Expert";
 	var level = "Expert";
 	} sessionStorage.setItem('fitlevel', level);
+};
+
+function getName() {
 	var name = document.getElementById('name').value;
 	sessionStorage.setItem('userName', name);
-}
+};
+
+document.getElementById('enter').addEventListener('click', getFit);
+document.getElementById('enter').addEventListener('click', getName);
