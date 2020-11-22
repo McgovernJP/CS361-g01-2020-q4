@@ -18,6 +18,7 @@
 
     document.addEventListener("DOMContentLoaded", function() {
       weather_script();
+      set_trail_diff();
     });
 
   </script>
@@ -38,11 +39,6 @@
         <h1 id="latitude"></h1>
         <h1 id="longitude"></h1>
       </div>
-      <!-- City Search **Removed because location will be sent from previous page -->
-      {{!-- <div class="d-flex justify-content-center">
-        <input id="city" class="form-control mr-sm-2 w-50 text-center d-flex justify-content-center"placeholder="Search City Name" aria-label="Search" default="Corvallis">
-        <button onclick="//weather_script()" id="city_button" class="btn btn-outline-success my-2 my-sm-0 justify-content-center">Search</button>
-      </div> --}}
     </div>
     <div class="text-center col-sm-6">
       <div class="col-xs-1 center-block">
@@ -52,7 +48,7 @@
       <img src="https://img.icons8.com/ios/452/mountain.png" class="img-fluid border rounded-circle border-success h-75" alt="Responsive image">
 
       <div class="col-xs-1 center-block">
-        <h1>Hard</h1>
+        <h1 id="trail_diff"></h1>
       </div> 
     </div>
   </div>
@@ -73,14 +69,12 @@
       <div class="card">
         <div class="card-header" id="headingOne1">
           <h4>
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
-              Boot Suggestion
+            <button id="boot_button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
             </button>
           </h4>
         </div>
         <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion1">
-          <div class="card-body">
-            Based on the trail difficulty and the weather at the trailhead we suggest that you use heavy hiking boots. The weather is nice, but the terrain will require good ankle support. [This is hard coded in. In the future it will be based on weather and trail difficulty]
+          <div id="boot_rec" class="card-body">
           </div>
         </div>
       </div>
@@ -93,8 +87,7 @@
       <div class="card">
         <div class="card-header" id="headingOne2">
           <h4>
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
-             Jacket Suggestion
+            <button id="jacket_button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
             </button>
           </h4>
         </div>
@@ -111,8 +104,7 @@
       <div class="card">
         <div class="card-header" id="headingOne3">
           <h4>
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
-             Clothing Suggestion
+            <button id="clothing_button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
             </button>
           </h4>
         </div>
@@ -129,14 +121,12 @@
       <div class="card">
         <div class="card-header" id="headingOne4">
           <h4>
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="true" aria-controls="collapseOne">
-             Gear Suggestion
+            <button id="gear_button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="true" aria-controls="collapseOne">
             </button>
           </h4>
         </div>
         <div id="collapseOne4" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion4">
-          <div class="card-body">
-            This trail is meant for a hike less than a day. Bring food and water as it is not a short hike. Bring trekking poles due to the elevation change. [This is hard coded in. In the future it will be based on weather and trail difficulty]
+          <div id="gear_rec" class="card-body">
           </div>
         </div>
       </div>
@@ -161,15 +151,13 @@
       console.log(trailLat)
       console.log(trailLong)
 
+      // API call to open weather map
       var req = new XMLHttpRequest();
-      //req.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat=39.7209&lon=-104.96&appid=6d9bda2548aa8225b2d4677e304abde7", false);
       req.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat="+ trailLat + "&lon="+ trailLong +"&appid=6d9bda2548aa8225b2d4677e304abde7", false);
-      //req.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=denver&appid=6d9bda2548aa8225b2d4677e304abde7", false);
       req.send(null);
       var overview = JSON.parse(req.responseText)
       console.log(overview)
       name = overview.name
-      console.log(name)
       temp = Math.round(overview.main.temp * (9/5) - 459.67)
       condition = overview.weather[0].main
       latitude = overview.coord.lat
@@ -216,74 +204,163 @@
     // weather and trail difficulty
 
     function get_boot_rec() {
-      
+      if(trailDiff == "easy") {
+        document.getElementById("boot_button").textContent = "Running Shoes"
+        document.getElementById("boot_rec").textContent = "This is an easier trail so we suggest running shoes or any other sor of " +
+                                                          "comfortable walking shoes."
+      } else if(trailDiff == "easy/intermediate") {
+        document.getElementById("boot_button").textContent = "Running Shoes"
+        document.getElementById("boot_rec").textContent = "This is an easy to intermediate trail so we suggest running shoes or " +
+                                                          "light hiking shoes."
+      } else if(trailDiff == "intermediate") {
+        document.getElementById("boot_button").textContent = "Light Hiking Shoes"
+        document.getElementById("boot_rec").textContent = "This is an intermediate trail so we suggest light hiking sheos."
+      } else if(trailDiff == "intermediate/difficult") {
+        document.getElementById("boot_button").textContent = "Hiking Shoes or Boots"
+        document.getElementById("boot_rec").textContent = "This trail is starting to get difficult. We suggest wearing hiking shoes " +
+                                                          "or boots."
+      } else if(trailDiff == "hard") {
+        document.getElementById("boot_button").textContent = "Hiking Boots"
+        document.getElementById("boot_rec").textContent = "This trail is difficult so we suggest hiking boots with good tread and " +
+                                                          "good ankle support."
+      } else if(trailDiff == "very hard") {
+        document.getElementById("boot_button").textContent = "Heavy Hiking Boots"
+        document.getElementById("boot_rec").textContent = "This trail is very difficult. Be sure to wear hiking boots with a lot of " +
+                                                          "support and tread."
+      } else {
+        document.getElementById("boot_button").textContent = "Boots"
+        document.getElementById("boot_rec").textContent = "Error. No trail data."
+      }
     }
     
     function get_jacket_rec() {
       if(temp <= 32 && (condition == "Rain" || condition == "Drizzle")) {
+        document.getElementById("jacket_button").textContent = "Heavy Rain Coat"
         document.getElementById("jacket_rec").textContent = "Temperatures are around freezing and it looks like rain. Wear " +
                                                             "a warm coat or parka that is water resistant. If you don't have " +
                                                             "a water resistant coat we suggest bringing a poncho to go over " +
                                                             "your coat."
 
       } else if(temp <= 32) {
+        document.getElementById("jacket_button").textContent = "Heavy Coat or Parka"
         document.getElementById("jacket_rec").textContent = "Temperatures are at or below freezing. We suggest you bring " +
                                                             "a warm coat or parka that is rated for cold temperatures. "
 
       } else if(temp > 32 && temp < 50 && (condition == "Rain" || condition == "Drizzle")) {
+        document.getElementById("jacket_button").textContent = "Warm Rain Jacket"
         document.getElementById("jacket_rec").textContent = "It is chilly and rainy out there today. Be sure to bring a decently " +
                                                             "warm jacket that is water resistant. If you don't have a water " +
                                                             "resistant jacket bring a light rain jacket to wear over your main " +
                                                             "coat."
 
       } else if(temp > 32 && temp < 50) {
+        document.getElementById("jacket_button").textContent = "Heavy Coat"
         document.getElementById("jacket_rec").textContent = "Be sure to bring a decently heavy jacket or coat. Temperatures " +
                                                             "are above freezing so there is no need to bring a large parka, " +
                                                             "but be prepared with a warm jacket."
 
       } else if(condition == "Rain" || condition == "Drizzle") {
+        document.getElementById("jacket_button").textContent = "Rain Jacket"
         document.getElementById("jacket_rec").textContent = "Tut, tut, it looks like rain! Make sure that you bring a light rain " 
                                                             "jacket."
 
       } else if(temp >= 50 && temp < 60) {
+        document.getElementById("jacket_button").textContent = "Light Jacket"
         document.getElementById("jacket_rec").textContent = "It isn't raining, but there is a chill in the air. You might want to " +
                                                             "pack a light jacket."
       
       } else if(temp >= 60) {
+        document.getElementById("jacket_button").textContent = "No Jacket"
         document.getElementById("jacket_rec").textContent = "No need for a jacket today. The temperature is great and there is no " +
                                                             "rain in the forecast."
       } else {
-        document.getElementById("jacket_rec").textContent = "Error. No location data. Please select a city to see recommendations."
+        document.getElementById("jacket_button").textContent = "Jacket"
+        document.getElementById("jacket_rec").textContent = "Error. No location data."
       }
     }
 
     function get_clothing_rec() {
       if(temp <= 32) {
+        document.getElementById("clothing_button").textContent = "Warm Clothes and Layers"
         document.getElementById("clothing_rec").textContent = "Prepare for below freezing temperatures. Wear layers " +
                                                               "so that if the weather warms throughout the day you can " +
                                                               "shed layers. Bring a hat and some gloves. Enjoy the hike!"
       } else if(temp > 32 && temp < 50) {
+        document.getElementById("clothing_button").textContent = "Warm Clothes"
         document.getElementById("clothing_rec").textContent = "It's chilly out there. Be sure to be wearing warm clothes " +
                                                               "and layers would be a good idea if it starts to warm up or " +
                                                               "if the temperature starts to drop. It looks like it is just " +
                                                               "above freezing so if you are out late temperatures could drop " +
                                                               "back into freezing. Dress warm and have fun!"
       } else if(temp >= 50 && temp < 60) {
+        document.getElementById("clothing_button").textContent = "Light Outer Layer"
         document.getElementById("clothing_rec").textContent = "It's the perfect temperature for a rigorous hike. Be sure to " +
                                                               "wear an outer layer, and you will be very comfortable."
       } else if(temp >= 60 && temp < 80) {
+        document.getElementById("clothing_button").textContent = "Light Clothing"
         document.getElementById("clothing_rec").textContent = "The temperature is perfect for a hike. You won't need anything " +
                                                               "too thick, but maybe a long sleeve to start the day. The " +
                                                               "temperature looks like it is perfect for shorts and a t-shirt."
       } else if(temp >= 80) {
+        document.getElementById("clothing_button").textContent = "Very Light/Breathable Clothing"
         document.getElementById("clothing_rec").textContent = "It's going to be a hot one! Dress light and be prepared to be warm. "
       } else {
-        document.getElementById("clothing_rec").textContent = "Error. No location data. Please select a city to see recommendations."
+        document.getElementById("clothing_button").textContent = "Clothing"
+        document.getElementById("clothing_rec").textContent = "Error. No location data."
       }
     }
 
     function get_gear_rec() {
+      if(trailDiff == "easy") {
+        document.getElementById("gear_button").textContent = "No Extra Gear"
+        document.getElementById("gear_rec").textContent = "This is an easy trail so no extra gear will be required. As always bring " +
+                                                          "water and snacks."
+      } else if(trailDiff == "easy/intermediate") {
+        document.getElementById("gear_button").textContent = "No Extra Gear"
+        document.getElementById("gear_rec").textContent = "This trail is easy to intermediate. No extra gear will be required. Make " +
+                                                          "sure to bring extra water and snacks."
+      } else if(trailDiff == "intermediate") {
+        document.getElementById("gear_button").textContent = "Trekking Poles"
+        document.getElementById("gear_rec").textContent = "This is an intermediate trail. The only extra equipment that is recommended " +
+                                                          "is a trekking pole. As always bring water and snacks."
+      } else if(trailDiff == "intermediate/difficult") {
+        document.getElementById("gear_button").textContent = "Trekking Poles"
+        document.getElementById("gear_rec").textContent = "This trail is a little more difficult. Be sure to bring a trekking pole " +
+                                                             "for stability. Bring food and water."
+      } else if(trailDiff == "hard") {
+        document.getElementById("gear_button").textContent = "Hiking Pack"
+        document.getElementById("gear_rec").textContent = "This trail is difficult. Make sure to bring trekking poles, a good pack " +
+                                                          "that distributes its weight evenly, and a first aid kit. You will need " +
+                                                          "extra food and water."
+      } else if(trailDiff == "very hard") {
+        document.getElementById("gear_button").textContent = "Extreme Gear"
+        document.getElementById("gear_rec").textContent = "This trail is very difficult. Make sure to bring a good pack that " +
+                                                          "distributes its weight evenly. You will also want trekking poles and " +
+                                                          "possibly mountaineering safety equipment. Be sure to bring a first aid " +
+                                                          "kit and it is recommended that you bring a satallite phone in case of " +
+                                                          "emergency."
+      } else {
+        document.getElementById("gear_button").textContent = "Gear"
+        document.getElementById("gear_rec").textContent = "Error. No trail data."
+      }
+    }
 
+    function set_trail_diff() {
+      if(trailDiff == "easy") {
+        document.getElementById("trail_diff").textContent = "Easy"
+      } else if(trailDiff == "easy/intermediate") {
+        document.getElementById("trail_diff").textContent = "Easy/Intermediate"
+      } else if(trailDiff == "intermediate") {
+        document.getElementById("trail_diff").textContent = "Intermediate"
+      } else if(trailDiff == "intermediate/difficult") {
+        document.getElementById("trail_diff").textContent = "Intermediate/Difficult"
+      } else if(trailDiff == "hard") {
+        document.getElementById("trail_diff").textContent = "Difficult"
+      } else if(trailDiff == "very hard") {
+        document.getElementById("trail_diff").textContent = "Very Difficult"
+      } else {
+        document.getElementById("trail_diff").textContent = ""
+      }
     }
 
   </script>
