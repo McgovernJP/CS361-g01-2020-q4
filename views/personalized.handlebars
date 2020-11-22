@@ -2,6 +2,8 @@
  
   <div class="container">
 
+console.log(sessionStorage.getItem('fitlevel'));
+
 <label for="diffSelect">Please select a difficulty: </label>
 
 <select name="diffSelect" id="diffSelect">
@@ -49,12 +51,10 @@ function getDirections(scriptLat, scriptLng){
 function getGear(scriptLat, scriptLng, scriptDiff){
   
   sessionStorage.setItem('trailLat', scriptLat);
-  console.log(sessionStorage.getItem('trailLat'));
+  //console.log(sessionStorage.getItem('trailLat'));
   sessionStorage.setItem('trailLng', scriptLng);
-  console.log(sessionStorage.getItem('trailLng'));
+  //console.log(sessionStorage.getItem('trailLng'));
   sessionStorage.setItem('trailDiff', scriptDiff);
-  
-  
   //console.log(sessionStorage.getItem('trailDiff'));
   location.href = "/recommendation";
 }
