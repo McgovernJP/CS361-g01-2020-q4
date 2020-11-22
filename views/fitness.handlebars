@@ -1,0 +1,40 @@
+
+
+  <h1 class="ml-4">Determine Your Physical Fitness Level</h1>
+  <p class="mt-2 ml-4">Complete the below form to determine your physical fitness level.</p>
+  <form method='post'>
+    <fieldset>
+      <legend class="mt-4 ml-4">Enter Information Below</legend>
+      <label class="mt-4 ml-4">Name:
+        <input type='text' name='name' id='name'>
+      </label>
+      <br>
+      <label class="mt-2 ml-4">Age:
+        <input type='number' name='age'>
+      </label>
+      <br>
+      <label class="mt-2 ml-4">Gender
+        <select name = 'gender'>
+              <option value='' selected>Select one</option>
+              <option value='female'>Female</option>
+              <option value='male'>Male</option>
+          </select>
+        </label>
+      <br>
+      <label class="mt-2 ml-4">Describe your activity level:
+        <select id = 'exercise'>
+            <option value='' selected>Select one</option>
+            <option value='none'>None</option>
+            <option value='light'>Light exercise</option>
+            <option value='lmod'>Light to Moderate exercise</option>
+            <option value='mod'>Moderate exercise</option>
+            <option value='intense'>Intense exercise</option>
+        </select>
+      </label>
+      <br>
+      <button type='button' class="btn btn-info mt-2 ml-4" id='enter'>Submit</button>
+      <br>
+    </fieldset>
+  </form>
+  <div id='result' class="mt-4 ml-4"></div>
+  <!-- End Your Pages Content Here -->

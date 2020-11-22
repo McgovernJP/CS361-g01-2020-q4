@@ -38,12 +38,19 @@
 </table> 
 <script type = "text/javascript" language = "javascript">
 function getDirections(scriptLat, scriptLng){
-  
+  /*
   sessionStorage.setItem('trailLat', scriptLat);
   sessionStorage.setItem('trailLng', scriptLng);
 
   location.href = "/directions";
+  */
+
+
+  //window.open('https://www.google.com/maps/dir//'+trailLat+'', '+trailLng+'/"', '_blank'); 
+  window.open("https://www.google.com/maps/dir//"+scriptLat+", "+scriptLng+"/", "_blank");
 }
+
+
 
 </script>
 
