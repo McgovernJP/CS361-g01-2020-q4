@@ -40,7 +40,7 @@
  <div id = "stage" class = "container">
     RESULTS
  </div>
- <table id="table"> 
+ <table id="table" class="table table-striped"> 
    <!-- # name length location -->
    
 </table> 
@@ -116,7 +116,7 @@ function getGear(scriptLat, scriptLng, scriptDiff){
 
 
 
-         var x = "<tr><td>"+ "#" +"</td><td>" + "Name" + "</td><td>"+"Length" +"</td><td>"+ "Difficulty" +"</td><td>"+ "Location" + "</td></tr>";
+         var x = "<tr><td>"+ "#" +"</td><td>" + "Name" + "</td><td>"+"Length" +"</td><td>"+ "Difficulty" +"</td><td>"+ "Location" +"</td><td></td><td></td></td><td></tr>";
          document.getElementById("table").innerHTML = "";
          
           
@@ -172,7 +172,7 @@ function getGear(scriptLat, scriptLng, scriptDiff){
               //console.log(myLocDiffString);
 
                sum++;
-                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+tDiff +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button onclick='getDirections("+myLocString+")'>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button onclick='getGear("+myLocDiffString+")'>Get Gear Recommendations</button>"+"</td></tr>";
+                x += "<tr><td>"+ sum +"</td><td>" + jd.trails[i].name + "</td><td>"+jd.trails[i].length +"</td><td>"+tDiff +"</td><td>"+jd.trails[i].location +"</td><td>" +  "<button class='btn btn-info' onclick='getDirections("+myLocString+")'>Get Directions</button>"+"</td><td>"+"</td><td>" +  "<button class='btn btn-secondary' onclick='getGear("+myLocDiffString+")'>Get Gear Recommendations</button>"+"</td></tr>";
              }
              }
               document.getElementById("table").innerHTML = x;
