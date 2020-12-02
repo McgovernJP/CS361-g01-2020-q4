@@ -2,38 +2,19 @@
  
   <div class="container">
 
+<form action="/">
+    <input type="submit" value="Re-select Location" />
+</form>
+
+<form action="/fitness">
+    <input type="submit" value="Re-select Activity Level" />
+</form>
 
 
-<label for="diffSelect">Filter trails?: </label>
-<!--
-<select name="diffSelect" id="diffSelect">
-  <option value="all">all</option>
-  <option value="easy">easy</option>
-  <option value="easy/intermediate">easy/intermediate</option>
-  <option value="intermediate">intermediate</option>
-  <option value="intermediate/difficult">intermediate/difficult</option>
-  <option value="hard">hard</option>
-  <option value="very hard">very hard</option>
-</select> 
--->
+location.href = "/recommendation";
 
-<select name="forMe" id="forMe">
-  <option value="all">all trails near by</option>
-  <option value="easy">filtered for fitness level</option>
-</select> 
-
-<!--
-<label for="location">Please enter a location: </label>
-<input type="text" id="location" name="location" required
-       minlength="4" maxlength="20" size="20" value = ""><br>
-        <!--
-       <input type = "button" id = "driver" value = "Get Trails nearby" class="btn btn-primary">
-       
-       <input type="checkbox" id="filter" name="filter" value="filterMe">
-        <label for="filter"> Limit results based off fitness level</label>
-        -->
-        
-       <input type = "button" id = "driver2" value = "Display Results" class="btn btn-primary">
+<input type="checkbox" id="filterMe" name="filterBox" class = "checkbox_check">
+<label for="filterBox">Filter results to your selected fitness level</label>
 
 
 
@@ -46,15 +27,7 @@
 </table> 
 <script type = "text/javascript" language = "javascript">
 function getDirections(scriptLat, scriptLng){
-  /*
-  sessionStorage.setItem('trailLat', scriptLat);
-  sessionStorage.setItem('trailLng', scriptLng);
 
-  location.href = "/directions";
-  */
-
-
-  //window.open('https://www.google.com/maps/dir//'+trailLat+'', '+trailLng+'/"', '_blank'); 
   window.open("https://www.google.com/maps/dir//"+scriptLat+", "+scriptLng+"/", "_blank");
 }
 
@@ -76,31 +49,30 @@ function getGear(scriptLat, scriptLng, scriptDiff){
 
 </script>
 
+<script type = "text/javascript" language = "javascript">
+function getTrails(){
 
-   <script type = "text/javascript" language = "javascript">
+  //start re-add here
 
-    $(document).ready(function() {
+  var lat = 40.0274;
+  var lng = -105.2519;
 
-      
-      var lat = 40.0274;
-      var lng = -105.2519;
+  var latNew;
+  var lngNew;         
 
-      var latNew;
-      var lngNew;
-  
- 
-       $("#driver2").click(function(event){
-         //var myLoc = document.getElementById("location").value;
-         var myLoc = (sessionStorage.getItem('locGlobal'));
-         //var myDiff = document.getElementById("diffSelect").value;
-         //console.log(sessionStorage.getItem('fitlevel'));
-         var myDiff = (sessionStorage.getItem('fitlevel'));
-         myNewLoc = (myLoc.replace(/ /g, '%2C%'));
-         myNextNewLoc = (myNewLoc.replace(/[',']+/g, ''));
-         var forMeorAll = document.getElementById("forMe").value;
-         //console.log(forMeorAll);
-         
-         //console.log(myNextNewLoc);
+  var myLoc = (sessionStorage.getItem('locGlobal'));
+  var myDiff = (sessionStorage.getItem('fitlevel'));
+  myNewLoc = (myLoc.replace(/ /g, '%2C%'));
+  myNextNewLoc = (myNewLoc.replace(/[',']+/g, ''));
+
+  var forMeorAll = 'true';
+  //var forMeorAll = document.getElementById("forMe").value;
+
+        if ($('input.checkbox_check').is(':checked')) {
+          
+            forMeorAll = 'false';
+        }
+
 
         $.get( "https://api.opencagedata.com/geocode/v1/google-v3-json?q="+myNextNewLoc+"&key={{oc_api}}&pretty=1&no_annotations=1", function(kd) {
 
@@ -119,12 +91,6 @@ function getGear(scriptLat, scriptLng, scriptDiff){
          var x = "<tr><td>"+ "#" +"</td><td>" + "Name" + "</td><td>"+"Length" +"</td><td>"+ "Difficulty" +"</td><td>"+ "Location" +"</td><td></td><td></td></td><td></tr>";
          document.getElementById("table").innerHTML = "";
          
-          
-
-            //console.log(latNew);
-            //console.log(lngNew);
-       
-
           $.getJSON('https://www.hikingproject.com/data/get-trails?lat='+lat+'&lon='+lng+'&maxDistance=10&key={{trail_api}}', function(jd) {
              
             var sum = 0;
@@ -154,8 +120,9 @@ function getGear(scriptLat, scriptLng, scriptDiff){
             
                //console.log(jd.trails[i].difficulty);
                //console.log(tDiff);
+               //console.log(myDiff);
                
-               if(tDiff == myDiff || forMeorAll == 'all'){
+               if(tDiff == myDiff || forMeorAll == 'true'){
                  //console.log('match');
                
                var tempLat;
@@ -179,6 +146,26 @@ function getGear(scriptLat, scriptLng, scriptDiff){
 
           });
        });
+
+  //end re-add
+
+  };
+
+
+
+</script>
+
+
+   <script type = "text/javascript" language = "javascript">
+
+    $(document).ready(function() {
+
+      getTrails();
+
+    $('input.checkbox_check').change(
+    function(){
+        getTrails();
+
     });
 
 
