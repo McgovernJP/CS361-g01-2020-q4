@@ -2,16 +2,20 @@
  
   <div class="container">
 
+<div style ='float: left; padding: 5px;'>
+<span style="display: inline;">
 <form action="/">
-    <input type="submit" value="Re-select Location" />
+    <input type="submit" class="btn btn-light" value="Re-select Location">
 </form>
+</div>
 
+<div style ='float: left; padding: 5px;'>
 <form action="/fitness">
-    <input type="submit" value="Re-select Activity Level" />
+    <input type="submit" class="btn btn-light" value="Re-select Activity Level">
 </form>
+</span>
+</div>
 
-
-location.href = "/recommendation";
 
 <input type="checkbox" id="filterMe" name="filterBox" class = "checkbox_check">
 <label for="filterBox">Filter results to your selected fitness level</label>
