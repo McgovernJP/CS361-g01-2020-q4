@@ -1,353 +1,357 @@
+<style>
+  #boot_button {
+    padding: 8px 8px 8px 32px;
+    background: #f0f0f0 url(https://image.flaticon.com/icons/png/128/907/907985.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 30px;
+  }
 
+  #jacket_button {
+    padding: 8px 8px 8px 32px;
+    background: #f0f0f0 url(https://static.thenounproject.com/png/244971-200.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 30px;
+  }
 
-  <script>
+  #clothing_button {
+    padding: 8px 8px 8px 32px;
+    background: #f0f0f0 url(https://static.thenounproject.com/png/143054-200.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 35px;
+  }
 
-    document.addEventListener("DOMContentLoaded", function() {
-      weather_script();
-      set_trail_diff();
-    });
+  #gear_button {
+    padding: 8px 8px 8px 32px;
+    background: #f0f0f0 url(https://img.icons8.com/pastel-glyph/2x/tourist-backpack.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 30px;
+  }
 
-  </script>
+</style>
 
-  <br>
-  <div class="form-group row">
-    <div class="text-center col-sm-6">
-      <div class="col-xs-1 center-block">
-        <h2>Weather</h2>
-      </div>
-      <img id="weather_image" src="" class="img-fluid border rounded-circle border-success h-50" alt="Responsive image">
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    weather_script();
+    set_trail_diff();
+  });
 
-      <!-- City weather info filled in by script -->
-      <div>
-        <h1 id="city_name"></h1>
-        <h1 id="city_temp"></h1>
-        <h1 id="city_weather"></h1>
-        <h1 id="latitude"></h1>
-        <h1 id="longitude"></h1>
-      </div>
+</script>
+
+<br>
+<div class="form-group row">
+  <div class="text-center col-sm-6">
+    <div class="col-xs-1 center-block">
+      <h2>Weather</h2>
     </div>
-    <div class="text-center col-sm-6">
-      <div class="col-xs-1 center-block">
-        <h2>Trail Difficulty</h2>
-      </div>  
+    <img id="weather_image" src="" class="img-fluid border rounded-circle border-success h-50" alt="Responsive image">
 
-      <img src="https://img.icons8.com/ios/452/mountain.png" class="img-fluid border rounded-circle border-success h-50" alt="Responsive image">
-
-      <div class="col-xs-1 center-block">
-        <h1 id="trail_diff"></h1>
-      </div> 
+    <!-- City weather info filled in by script -->
+    <div>
+      <h1 id="city_name"></h1>
+      <h1 id="city_temp"></h1>
+      <h1 id="city_weather"></h1>
+      <h1 id="latitude"></h1>
+      <h1 id="longitude"></h1>
     </div>
   </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  <div class="text-center col-sm-6">
+    <div class="col-xs-1 center-block">
+      <h2>Trail Difficulty</h2>
+    </div>  
 
-  <!-- Gear/Clothing Suggestions -->
-  <div class="form-group" style="padding-left: 50px;">
-    <!-- Shoes -->
-    <div id="accordion1" class="container form-group row border border-success mr-sm-2 w-50 text-center d-flex justify-content-center">
-      <img src="https://image.flaticon.com/icons/png/128/907/907985.png">
-      <div class="w-100"></div>
-      <div class="card">
-        <div class="card-header" id="headingOne1">
-          <h4>
-            <button id="boot_button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
-            </button>
-          </h4>
-        </div>
-        <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion1">
-          <div id="boot_rec" class="card-body">
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <!-- Jacket -->
-    <div id="accordion2" class="container form-group row border border-success mr-sm-2 w-50 text-center d-flex justify-content-center">
-      <img src="https://static.thenounproject.com/png/244971-200.png">
-      <div class="w-100"></div>
-      <div class="card">
-        <div class="card-header" id="headingOne2">
-          <h4>
-            <button id="jacket_button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
-            </button>
-          </h4>
-        </div>
-        <div id="collapseOne2" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion2">
-          <div id="jacket_rec" class="card-body"></div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <!-- Clothing -->
-    <div id="accordion3" class="container form-group row border border-success mr-sm-2 w-50 text-center d-flex justify-content-center">
-      <img src="https://static.thenounproject.com/png/143054-200.png">
-      <div class="w-100"></div>
-      <div class="card">
-        <div class="card-header" id="headingOne3">
-          <h4>
-            <button id="clothing_button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
-            </button>
-          </h4>
-        </div>
-        <div id="collapseOne3" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion3">
-          <div id="clothing_rec" class="card-body"></div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <!-- Gear -->
-    <div id="accordion4" class="container form-group row border border-success mr-sm-2 w-50 text-center d-flex justify-content-center">
-      <img src="https://img.icons8.com/pastel-glyph/2x/tourist-backpack.png">
-      <div class="w-100"></div>
-      <div class="card">
-        <div class="card-header" id="headingOne4">
-          <h4>
-            <button id="gear_button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="true" aria-controls="collapseOne">
-            </button>
-          </h4>
-        </div>
-        <div id="collapseOne4" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion4">
-          <div id="gear_rec" class="card-body">
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
+    <img src="https://img.icons8.com/ios/452/mountain.png" class="img-fluid border rounded-circle border-success h-50" alt="Responsive image">
+
+    <div class="col-xs-1 center-block">
+      <h1 id="trail_diff"></h1>
+    </div> 
   </div>
+</div>
 
+<!-- Gear/Clothing Suggestions -->
+<div class="accordion container" id="accordionExample">
+  <div>
+    <h1>Gear and Clothing Recommendations</h1>
+  </div><br><br>
+  <!-- Boot Suggestion -->
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h1 class="mb-0">
+        <button id="boot_button" class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></button>
+      </h1>
+    </div>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div id="boot_rec" class="card-body"></div>
+    </div>
+  </div>
+  <br><br>
+  <!-- Jacket Suggestion -->
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button id="jacket_button" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"></button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div id="jacket_rec" class="card-body"></div>
+    </div>
+  </div>
+  <br><br>
+  <!-- Clothing Suggestion -->
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button id="clothing_button" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"></button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div id="clothing_rec" class="card-body"></div>
+    </div>
+  </div>
+  <br><br>
+  <!-- Gear Suggestion -->
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button id="gear_button" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"></button>
+      </h2>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+      <div id="gear_rec" class="card-body"></div>
+    </div>
+  </div>
+</div>
+<br><br><br><br>
 
-  <script>
+<script>
+  
+  // Weather variables used for gear recs
+  var temp = null;
+  var name = null;
+  var condition = null;
+  var trailLat = sessionStorage.getItem("trailLat")
+  var trailLong = sessionStorage.getItem("trailLong")
+  var trailDiff = sessionStorage.getItem("trailDiff")
+
+  // Main script to gather weather information
+  function weather_script() {
+
+    console.log(trailLat)
+    console.log(trailLong)
+
+    // API call to open weather map
+    var req = new XMLHttpRequest();
+    req.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat="+ trailLat + "&lon="+ trailLong +"&appid=6d9bda2548aa8225b2d4677e304abde7", false);
+    req.send(null);
+    var overview = JSON.parse(req.responseText)
+    console.log(overview)
+    name = overview.name
+    temp = Math.round(overview.main.temp * (9/5) - 459.67)
+    condition = overview.weather[0].main
+    latitude = overview.coord.lat
+    longitude = overview.coord.lon
+
+    // Set text under picture
+    document.getElementById("city_name").textContent = name
+    document.getElementById("city_temp").textContent = temp + String.fromCharCode(176) + "F"
+    document.getElementById("city_weather").textContent = condition
+    document.getElementById("latitude").textContent = "Lat: " + latitude + String.fromCharCode(176)
+    document.getElementById("longitude").textContent = "Long: " + longitude + String.fromCharCode(176)
+
+    // Sets the picture description of the condtion 
+    set_weather_pic(condition)
+
+    //Need recommendations
+    get_boot_rec()
+    get_jacket_rec()
+    get_clothing_rec()
+    get_gear_rec()
+  }
+
+  function set_weather_pic(condition) {
+    if(condition == "Clear"){
+      document.getElementById("weather_image").src = "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/7326596361553239397-512.png"
+    } else if(condition == "Clouds") {
+      document.getElementById("weather_image").src = "https://www.hersheylittleleague.net/app_images/weather_icons/a_few_clouds.png"
+    } else if(condition == "Drizzle") {
+      document.getElementById("weather_image").src = "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/10573724551548329942-512.png"
+    } else if(condition == "Rain") {
+      document.getElementById("weather_image").src = "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/10573724551548329942-512.png"
+    } else if(condition == "Thunderstorm") {
+      document.getElementById("weather_image").src = "https://lh3.googleusercontent.com/proxy/Zg_ybS4kFmEJiFwEs5DMD7WFPMuTlphjwQLMA4LRR-aoUlxOovZJNC8PlBm7-Zj5VVDGvBKkJ9ZbeRWKW0wrBKnGqCGbU3ywjwl8hW748sTm"
+    } else if(condition == "Snow") {
+      document.getElementById("weather_image").src = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMv-NIXhS0kiDdw9BsCnil7q8hWHy8VtR1Vw&usqp=CAU"
+    } else if(condition == "Mist") {
+      document.getElementById("weather_image").src = "data:image/png;base64,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"
+    } else {
+      document.getElementById("weather_image").src = "data:image/png;base64,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"
+    }
+  }
+
+  // Functions for the recommendations. Each recommendation is pre-written and determined based on
+  // weather and trail difficulty
+
+  function get_boot_rec() {
+    if(trailDiff == "easy") {
+      document.getElementById("boot_button").textContent = "Running Shoes"
+      document.getElementById("boot_rec").textContent = "This is an easier trail so we suggest running shoes or any other sor of " +
+                                                        "comfortable walking shoes."
+    } else if(trailDiff == "easy/intermediate") {
+      document.getElementById("boot_button").textContent = "Running Shoes"
+      document.getElementById("boot_rec").textContent = "This is an easy to intermediate trail so we suggest running shoes or " +
+                                                        "light hiking shoes."
+    } else if(trailDiff == "intermediate") {
+      document.getElementById("boot_button").textContent = "Light Hiking Shoes"
+      document.getElementById("boot_rec").textContent = "This is an intermediate trail so we suggest light hiking sheos."
+    } else if(trailDiff == "intermediate/difficult") {
+      document.getElementById("boot_button").textContent = "Hiking Shoes or Boots"
+      document.getElementById("boot_rec").textContent = "This trail is starting to get difficult. We suggest wearing hiking shoes " +
+                                                        "or boots."
+    } else if(trailDiff == "hard") {
+      document.getElementById("boot_button").textContent = "Hiking Boots"
+      document.getElementById("boot_rec").textContent = "This trail is difficult so we suggest hiking boots with good tread and " +
+                                                        "good ankle support."
+    } else if(trailDiff == "very hard") {
+      document.getElementById("boot_button").textContent = "Heavy Hiking Boots"
+      document.getElementById("boot_rec").textContent = "This trail is very difficult. Be sure to wear hiking boots with a lot of " +
+                                                        "support and tread."
+    } else {
+      document.getElementById("boot_button").textContent = "Boots"
+      document.getElementById("boot_rec").textContent = "Error. No trail data."
+    }
+  }
+  
+  function get_jacket_rec() {
+    if(temp <= 32 && (condition == "Rain" || condition == "Drizzle")) {
+      document.getElementById("jacket_button").textContent = "Heavy Rain Coat"
+      document.getElementById("jacket_rec").textContent = "Temperatures are around freezing and it looks like rain. Wear " +
+                                                          "a warm coat or parka that is water resistant. If you don't have " +
+                                                          "a water resistant coat we suggest bringing a poncho to go over " +
+                                                          "your coat."
+
+    } else if(temp <= 32) {
+      document.getElementById("jacket_button").textContent = "Heavy Coat or Parka"
+      document.getElementById("jacket_rec").textContent = "Temperatures are at or below freezing. We suggest you bring " +
+                                                          "a warm coat or parka that is rated for cold temperatures. "
+
+    } else if(temp > 32 && temp < 50 && (condition == "Rain" || condition == "Drizzle")) {
+      document.getElementById("jacket_button").textContent = "Warm Rain Jacket"
+      document.getElementById("jacket_rec").textContent = "It is chilly and rainy out there today. Be sure to bring a decently " +
+                                                          "warm jacket that is water resistant. If you don't have a water " +
+                                                          "resistant jacket bring a light rain jacket to wear over your main " +
+                                                          "coat."
+
+    } else if(temp > 32 && temp < 50) {
+      document.getElementById("jacket_button").textContent = "Heavy Coat"
+      document.getElementById("jacket_rec").textContent = "Be sure to bring a decently heavy jacket or coat. Temperatures " +
+                                                          "are above freezing so there is no need to bring a large parka, " +
+                                                          "but be prepared with a warm jacket."
+
+    } else if(condition == "Rain" || condition == "Drizzle") {
+      document.getElementById("jacket_button").textContent = "Rain Jacket"
+      document.getElementById("jacket_rec").textContent = "Tut, tut, it looks like rain! Make sure that you bring a light rain " 
+                                                          "jacket."
+
+    } else if(temp >= 50 && temp < 60) {
+      document.getElementById("jacket_button").textContent = "Light Jacket"
+      document.getElementById("jacket_rec").textContent = "It isn't raining, but there is a chill in the air. You might want to " +
+                                                          "pack a light jacket."
     
-    // Weather variables used for gear recs
-    var temp = null;
-    var name = null;
-    var condition = null;
-    var trailLat = sessionStorage.getItem("trailLat")
-    var trailLong = sessionStorage.getItem("trailLng")
-    var trailDiff = sessionStorage.getItem("trailDiff")
-
-    // Main script to gather weather information
-    function weather_script() {
-
-      console.log(trailLat)
-      console.log(trailLong)
-
-      // API call to open weather map
-      var req = new XMLHttpRequest();
-      req.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat="+ trailLat + "&lon="+ trailLong +"&appid=6d9bda2548aa8225b2d4677e304abde7", false);
-      req.send(null);
-      var overview = JSON.parse(req.responseText)
-      console.log(overview)
-      name = overview.name
-      temp = Math.round(overview.main.temp * (9/5) - 459.67)
-      condition = overview.weather[0].main
-      latitude = overview.coord.lat
-      longitude = overview.coord.lon
-
-      // Set text under picture
-      document.getElementById("city_name").textContent = name
-      document.getElementById("city_temp").textContent = temp + String.fromCharCode(176) + "F"
-      document.getElementById("city_weather").textContent = condition
-      document.getElementById("latitude").textContent = "Lat: " + latitude + String.fromCharCode(176)
-      document.getElementById("longitude").textContent = "Long: " + longitude + String.fromCharCode(176)
-
-      // Sets the picture description of the condtion 
-      set_weather_pic(condition)
-
-      //Need recommendations
-      get_boot_rec()
-      get_jacket_rec()
-      get_clothing_rec()
-      get_gear_rec()
+    } else if(temp >= 60) {
+      document.getElementById("jacket_button").textContent = "No Jacket"
+      document.getElementById("jacket_rec").textContent = "No need for a jacket today. The temperature is great and there is no " +
+                                                          "rain in the forecast."
+    } else {
+      document.getElementById("jacket_button").textContent = "Jacket"
+      document.getElementById("jacket_rec").textContent = "Error. No location data."
     }
+  }
 
-    function set_weather_pic(condition) {
-      if(condition == "Clear"){
-        document.getElementById("weather_image").src = "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/7326596361553239397-512.png"
-      } else if(condition == "Clouds") {
-        document.getElementById("weather_image").src = "https://www.hersheylittleleague.net/app_images/weather_icons/a_few_clouds.png"
-      } else if(condition == "Drizzle") {
-        document.getElementById("weather_image").src = "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/10573724551548329942-512.png"
-      } else if(condition == "Rain") {
-        document.getElementById("weather_image").src = "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/10573724551548329942-512.png"
-      } else if(condition == "Thunderstorm") {
-        document.getElementById("weather_image").src = "https://lh3.googleusercontent.com/proxy/Zg_ybS4kFmEJiFwEs5DMD7WFPMuTlphjwQLMA4LRR-aoUlxOovZJNC8PlBm7-Zj5VVDGvBKkJ9ZbeRWKW0wrBKnGqCGbU3ywjwl8hW748sTm"
-      } else if(condition == "Snow") {
-        document.getElementById("weather_image").src = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMv-NIXhS0kiDdw9BsCnil7q8hWHy8VtR1Vw&usqp=CAU"
-      } else if(condition == "Mist") {
-        document.getElementById("weather_image").src = "data:image/png;base64,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"
-      } else {
-        document.getElementById("weather_image").src = "data:image/png;base64,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"
-      }
+  function get_clothing_rec() {
+    if(temp <= 32) {
+      document.getElementById("clothing_button").textContent = "Warm Clothes and Layers"
+      document.getElementById("clothing_rec").textContent = "Prepare for below freezing temperatures. Wear layers " +
+                                                            "so that if the weather warms throughout the day you can " +
+                                                            "shed layers. Bring a hat and some gloves. Enjoy the hike!"
+    } else if(temp > 32 && temp < 50) {
+      document.getElementById("clothing_button").textContent = "Warm Clothes"
+      document.getElementById("clothing_rec").textContent = "It's chilly out there. Be sure to be wearing warm clothes " +
+                                                            "and layers would be a good idea if it starts to warm up or " +
+                                                            "if the temperature starts to drop. It looks like it is just " +
+                                                            "above freezing so if you are out late temperatures could drop " +
+                                                            "back into freezing. Dress warm and have fun!"
+    } else if(temp >= 50 && temp < 60) {
+      document.getElementById("clothing_button").textContent = "Light Outer Layer"
+      document.getElementById("clothing_rec").textContent = "It's the perfect temperature for a rigorous hike. Be sure to " +
+                                                            "wear an outer layer, and you will be very comfortable."
+    } else if(temp >= 60 && temp < 80) {
+      document.getElementById("clothing_button").textContent = "Light Clothing"
+      document.getElementById("clothing_rec").textContent = "The temperature is perfect for a hike. You won't need anything " +
+                                                            "too thick, but maybe a long sleeve to start the day. The " +
+                                                            "temperature looks like it is perfect for shorts and a t-shirt."
+    } else if(temp >= 80) {
+      document.getElementById("clothing_button").textContent = "Very Light/Breathable Clothing"
+      document.getElementById("clothing_rec").textContent = "It's going to be a hot one! Dress light and be prepared to be warm. "
+    } else {
+      document.getElementById("clothing_button").textContent = "Clothing"
+      document.getElementById("clothing_rec").textContent = "Error. No location data."
     }
+  }
 
-    // Functions for the recommendations. Each recommendation is pre-written and determined based on
-    // weather and trail difficulty
-
-    function get_boot_rec() {
-      if(trailDiff == "easy") {
-        document.getElementById("boot_button").textContent = "Running Shoes"
-        document.getElementById("boot_rec").textContent = "This is an easier trail so we suggest running shoes or any other sor of " +
-                                                          "comfortable walking shoes."
-      } else if(trailDiff == "easy/intermediate") {
-        document.getElementById("boot_button").textContent = "Running Shoes"
-        document.getElementById("boot_rec").textContent = "This is an easy to intermediate trail so we suggest running shoes or " +
-                                                          "light hiking shoes."
-      } else if(trailDiff == "intermediate") {
-        document.getElementById("boot_button").textContent = "Light Hiking Shoes"
-        document.getElementById("boot_rec").textContent = "This is an intermediate trail so we suggest light hiking sheos."
-      } else if(trailDiff == "intermediate/difficult") {
-        document.getElementById("boot_button").textContent = "Hiking Shoes or Boots"
-        document.getElementById("boot_rec").textContent = "This trail is starting to get difficult. We suggest wearing hiking shoes " +
-                                                          "or boots."
-      } else if(trailDiff == "hard") {
-        document.getElementById("boot_button").textContent = "Hiking Boots"
-        document.getElementById("boot_rec").textContent = "This trail is difficult so we suggest hiking boots with good tread and " +
-                                                          "good ankle support."
-      } else if(trailDiff == "very hard") {
-        document.getElementById("boot_button").textContent = "Heavy Hiking Boots"
-        document.getElementById("boot_rec").textContent = "This trail is very difficult. Be sure to wear hiking boots with a lot of " +
-                                                          "support and tread."
-      } else {
-        document.getElementById("boot_button").textContent = "Boots"
-        document.getElementById("boot_rec").textContent = "Error. No trail data."
-      }
+  function get_gear_rec() {
+    if(trailDiff == "easy") {
+      document.getElementById("gear_button").textContent = "No Extra Gear"
+      document.getElementById("gear_rec").textContent = "This is an easy trail so no extra gear will be required. As always bring " +
+                                                        "water and snacks."
+    } else if(trailDiff == "easy/intermediate") {
+      document.getElementById("gear_button").textContent = "No Extra Gear"
+      document.getElementById("gear_rec").textContent = "This trail is easy to intermediate. No extra gear will be required. Make " +
+                                                        "sure to bring extra water and snacks."
+    } else if(trailDiff == "intermediate") {
+      document.getElementById("gear_button").textContent = "Trekking Poles"
+      document.getElementById("gear_rec").textContent = "This is an intermediate trail. The only extra equipment that is recommended " +
+                                                        "is a trekking pole. As always bring water and snacks."
+    } else if(trailDiff == "intermediate/difficult") {
+      document.getElementById("gear_button").textContent = "Trekking Poles"
+      document.getElementById("gear_rec").textContent = "This trail is a little more difficult. Be sure to bring a trekking pole " +
+                                                            "for stability. Bring food and water."
+    } else if(trailDiff == "hard") {
+      document.getElementById("gear_button").textContent = "Hiking Pack"
+      document.getElementById("gear_rec").textContent = "This trail is difficult. Make sure to bring trekking poles, a good pack " +
+                                                        "that distributes its weight evenly, and a first aid kit. You will need " +
+                                                        "extra food and water."
+    } else if(trailDiff == "very hard") {
+      document.getElementById("gear_button").textContent = "Extreme Gear"
+      document.getElementById("gear_rec").textContent = "This trail is very difficult. Make sure to bring a good pack that " +
+                                                        "distributes its weight evenly. You will also want trekking poles and " +
+                                                        "possibly mountaineering safety equipment. Be sure to bring a first aid " +
+                                                        "kit and it is recommended that you bring a satallite phone in case of " +
+                                                        "emergency."
+    } else {
+      document.getElementById("gear_button").textContent = "Gear"
+      document.getElementById("gear_rec").textContent = "Error. No trail data."
     }
-    
-    function get_jacket_rec() {
-      if(temp <= 32 && (condition == "Rain" || condition == "Drizzle")) {
-        document.getElementById("jacket_button").textContent = "Heavy Rain Coat"
-        document.getElementById("jacket_rec").textContent = "Temperatures are around freezing and it looks like rain. Wear " +
-                                                            "a warm coat or parka that is water resistant. If you don't have " +
-                                                            "a water resistant coat we suggest bringing a poncho to go over " +
-                                                            "your coat."
+  }
 
-      } else if(temp <= 32) {
-        document.getElementById("jacket_button").textContent = "Heavy Coat or Parka"
-        document.getElementById("jacket_rec").textContent = "Temperatures are at or below freezing. We suggest you bring " +
-                                                            "a warm coat or parka that is rated for cold temperatures. "
-
-      } else if(temp > 32 && temp < 50 && (condition == "Rain" || condition == "Drizzle")) {
-        document.getElementById("jacket_button").textContent = "Warm Rain Jacket"
-        document.getElementById("jacket_rec").textContent = "It is chilly and rainy out there today. Be sure to bring a decently " +
-                                                            "warm jacket that is water resistant. If you don't have a water " +
-                                                            "resistant jacket bring a light rain jacket to wear over your main " +
-                                                            "coat."
-
-      } else if(temp > 32 && temp < 50) {
-        document.getElementById("jacket_button").textContent = "Heavy Coat"
-        document.getElementById("jacket_rec").textContent = "Be sure to bring a decently heavy jacket or coat. Temperatures " +
-                                                            "are above freezing so there is no need to bring a large parka, " +
-                                                            "but be prepared with a warm jacket."
-
-      } else if(condition == "Rain" || condition == "Drizzle") {
-        document.getElementById("jacket_button").textContent = "Rain Jacket"
-        document.getElementById("jacket_rec").textContent = "Tut, tut, it looks like rain! Make sure that you bring a light rain " 
-                                                            "jacket."
-
-      } else if(temp >= 50 && temp < 60) {
-        document.getElementById("jacket_button").textContent = "Light Jacket"
-        document.getElementById("jacket_rec").textContent = "It isn't raining, but there is a chill in the air. You might want to " +
-                                                            "pack a light jacket."
-      
-      } else if(temp >= 60) {
-        document.getElementById("jacket_button").textContent = "No Jacket"
-        document.getElementById("jacket_rec").textContent = "No need for a jacket today. The temperature is great and there is no " +
-                                                            "rain in the forecast."
-      } else {
-        document.getElementById("jacket_button").textContent = "Jacket"
-        document.getElementById("jacket_rec").textContent = "Error. No location data."
-      }
+  function set_trail_diff() {
+    if(trailDiff == "easy") {
+      document.getElementById("trail_diff").textContent = "Easy"
+    } else if(trailDiff == "easy/intermediate") {
+      document.getElementById("trail_diff").textContent = "Easy/Intermediate"
+    } else if(trailDiff == "intermediate") {
+      document.getElementById("trail_diff").textContent = "Intermediate"
+    } else if(trailDiff == "intermediate/difficult") {
+      document.getElementById("trail_diff").textContent = "Intermediate/Difficult"
+    } else if(trailDiff == "hard") {
+      document.getElementById("trail_diff").textContent = "Difficult"
+    } else if(trailDiff == "very hard") {
+      document.getElementById("trail_diff").textContent = "Very Difficult"
+    } else {
+      document.getElementById("trail_diff").textContent = ""
     }
+  }
 
-    function get_clothing_rec() {
-      if(temp <= 32) {
-        document.getElementById("clothing_button").textContent = "Warm Clothes and Layers"
-        document.getElementById("clothing_rec").textContent = "Prepare for below freezing temperatures. Wear layers " +
-                                                              "so that if the weather warms throughout the day you can " +
-                                                              "shed layers. Bring a hat and some gloves. Enjoy the hike!"
-      } else if(temp > 32 && temp < 50) {
-        document.getElementById("clothing_button").textContent = "Warm Clothes"
-        document.getElementById("clothing_rec").textContent = "It's chilly out there. Be sure to be wearing warm clothes " +
-                                                              "and layers would be a good idea if it starts to warm up or " +
-                                                              "if the temperature starts to drop. It looks like it is just " +
-                                                              "above freezing so if you are out late temperatures could drop " +
-                                                              "back into freezing. Dress warm and have fun!"
-      } else if(temp >= 50 && temp < 60) {
-        document.getElementById("clothing_button").textContent = "Light Outer Layer"
-        document.getElementById("clothing_rec").textContent = "It's the perfect temperature for a rigorous hike. Be sure to " +
-                                                              "wear an outer layer, and you will be very comfortable."
-      } else if(temp >= 60 && temp < 80) {
-        document.getElementById("clothing_button").textContent = "Light Clothing"
-        document.getElementById("clothing_rec").textContent = "The temperature is perfect for a hike. You won't need anything " +
-                                                              "too thick, but maybe a long sleeve to start the day. The " +
-                                                              "temperature looks like it is perfect for shorts and a t-shirt."
-      } else if(temp >= 80) {
-        document.getElementById("clothing_button").textContent = "Very Light/Breathable Clothing"
-        document.getElementById("clothing_rec").textContent = "It's going to be a hot one! Dress light and be prepared to be warm. "
-      } else {
-        document.getElementById("clothing_button").textContent = "Clothing"
-        document.getElementById("clothing_rec").textContent = "Error. No location data."
-      }
-    }
-
-    function get_gear_rec() {
-      if(trailDiff == "easy") {
-        document.getElementById("gear_button").textContent = "No Extra Gear"
-        document.getElementById("gear_rec").textContent = "This is an easy trail so no extra gear will be required. As always bring " +
-                                                          "water and snacks."
-      } else if(trailDiff == "easy/intermediate") {
-        document.getElementById("gear_button").textContent = "No Extra Gear"
-        document.getElementById("gear_rec").textContent = "This trail is easy to intermediate. No extra gear will be required. Make " +
-                                                          "sure to bring extra water and snacks."
-      } else if(trailDiff == "intermediate") {
-        document.getElementById("gear_button").textContent = "Trekking Poles"
-        document.getElementById("gear_rec").textContent = "This is an intermediate trail. The only extra equipment that is recommended " +
-                                                          "is a trekking pole. As always bring water and snacks."
-      } else if(trailDiff == "intermediate/difficult") {
-        document.getElementById("gear_button").textContent = "Trekking Poles"
-        document.getElementById("gear_rec").textContent = "This trail is a little more difficult. Be sure to bring a trekking pole " +
-                                                             "for stability. Bring food and water."
-      } else if(trailDiff == "hard") {
-        document.getElementById("gear_button").textContent = "Hiking Pack"
-        document.getElementById("gear_rec").textContent = "This trail is difficult. Make sure to bring trekking poles, a good pack " +
-                                                          "that distributes its weight evenly, and a first aid kit. You will need " +
-                                                          "extra food and water."
-      } else if(trailDiff == "very hard") {
-        document.getElementById("gear_button").textContent = "Extreme Gear"
-        document.getElementById("gear_rec").textContent = "This trail is very difficult. Make sure to bring a good pack that " +
-                                                          "distributes its weight evenly. You will also want trekking poles and " +
-                                                          "possibly mountaineering safety equipment. Be sure to bring a first aid " +
-                                                          "kit and it is recommended that you bring a satallite phone in case of " +
-                                                          "emergency."
-      } else {
-        document.getElementById("gear_button").textContent = "Gear"
-        document.getElementById("gear_rec").textContent = "Error. No trail data."
-      }
-    }
-
-    function set_trail_diff() {
-      if(trailDiff == "easy") {
-        document.getElementById("trail_diff").textContent = "Easy"
-      } else if(trailDiff == "easy/intermediate") {
-        document.getElementById("trail_diff").textContent = "Easy/Intermediate"
-      } else if(trailDiff == "intermediate") {
-        document.getElementById("trail_diff").textContent = "Intermediate"
-      } else if(trailDiff == "intermediate/difficult") {
-        document.getElementById("trail_diff").textContent = "Intermediate/Difficult"
-      } else if(trailDiff == "hard") {
-        document.getElementById("trail_diff").textContent = "Difficult"
-      } else if(trailDiff == "very hard") {
-        document.getElementById("trail_diff").textContent = "Very Difficult"
-      } else {
-        document.getElementById("trail_diff").textContent = ""
-      }
-    }
-
-  </script>
-
+</script>
