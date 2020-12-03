@@ -25,5 +25,11 @@ function getName() {
 	
 };
 
+function showButton() {
+	var reSelect = document.getElementById('reSelect')
+	reSelect.style.display = "inline"
+};
+
 document.getElementById('enter').addEventListener('click', getFit);
 document.getElementById('enter').addEventListener('click', getName);
+document.getElementById('enter').addEventListener('click', showButton);
