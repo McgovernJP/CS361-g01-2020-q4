@@ -1,10 +1,22 @@
 <style>
+  #boot_card {
+  background-image: linear-gradient(to right, #347545 , white);
+  border-radius: 5px;
+  }
+
   #boot_button {
     padding: 8px 8px 8px 32px;
     background: url(https://image.flaticon.com/icons/png/128/907/907985.png);
     background-position: right;
     background-repeat: no-repeat;
     background-size: 30px;
+    text-decoration: none;
+    color: white;
+  }
+
+  #jacket_card {
+  background-image: linear-gradient(to right, #347545 , white);
+  border-radius: 5px;
   }
 
   #jacket_button {
@@ -13,6 +25,13 @@
     background-position: right;
     background-repeat: no-repeat;
     background-size: 30px;
+    text-decoration: none;
+    color: white;
+  }
+
+  #clothing_card {
+  background-image: linear-gradient(to right, #347545 , white);
+  border-radius: 5px;
   }
 
   #clothing_button {
@@ -21,7 +40,15 @@
     background-position: right;
     background-repeat: no-repeat;
     background-size: 35px;
+    text-decoration: none;
+    color: white;
   }
+
+  #gear_card {
+  background-image: linear-gradient(to right, #347545 , white);
+  border-radius: 5px;
+  }
+
 
   #gear_button {
     padding: 8px 8px 8px 32px;
@@ -29,6 +56,8 @@
     background-position: right;
     background-repeat: no-repeat;
     background-size: 30px;
+    text-decoration: none;
+    color: white;
   }
 
 </style>
@@ -40,33 +69,29 @@
   });
 
 </script>
-
 <br>
-<div class="form-group row">
+<div class="form-group row m-0">
   <div class="text-center col-sm-6">
     <div class="col-xs-1 center-block">
       <h2>Weather</h2>
     </div>
-    <img id="weather_image" src="" class="img-fluid border rounded-circle border-success h-50" alt="Responsive image">
-
+    <img style="background-image: linear-gradient(to bottom,white ,#E2FCFF);" id="weather_image" src="" class="img-fluid border rounded-circle border-success h-50" alt="Responsive image">
     <!-- City weather info filled in by script -->
     <div>
       <h1 id="city_name"></h1>
       <h1 id="city_temp"></h1>
       <h1 id="city_weather"></h1>
-      <h1 id="latitude"></h1>
-      <h1 id="longitude"></h1>
     </div>
   </div>
   <div class="text-center col-sm-6">
     <div class="col-xs-1 center-block">
       <h2>Trail Difficulty</h2>
     </div>  
-
-    <img src="https://img.icons8.com/ios/452/mountain.png" class="img-fluid border rounded-circle border-success h-50" alt="Responsive image">
-
+      <img style="background-image: linear-gradient(to bottom,white ,#CFE8D5);" src="https://img.icons8.com/ios/452/mountain.png" class="img-fluid border rounded-circle border-success h-50" alt="Responsive image">
     <div class="col-xs-1 center-block">
       <h1 id="trail_diff"></h1>
+      <h1 id="latitude"></h1>
+      <h1 id="longitude"></h1>
     </div> 
   </div>
 </div>
@@ -78,9 +103,9 @@
   </div><br><br>
   <!-- Boot Suggestion -->
   <div class="card">
-    <div class="card-header" id="headingOne">
-      <h1 class="mb-0">
-        <button id="boot_button" class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"></button>
+    <div id="boot_card" class="card-header" id="headingOne">
+      <h1 class="mb-0 row">
+        <button id="boot_button" class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" data-toggle="tooltip" data-placement="right" title="Click for more info"></button>
       </h1>
     </div>
     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -90,9 +115,9 @@
   <br><br>
   <!-- Jacket Suggestion -->
   <div class="card">
-    <div class="card-header" id="headingTwo">
+    <div id="jacket_card" class="card-header" id="headingTwo">
       <h2 class="mb-0">
-        <button id="jacket_button" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"></button>
+        <button id="jacket_button" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-toggle="tooltip" data-placement="right" title="Click for more info"></button>
       </h2>
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -102,9 +127,9 @@
   <br><br>
   <!-- Clothing Suggestion -->
   <div class="card">
-    <div class="card-header" id="headingThree">
+    <div id="clothing_card" class="card-header" id="headingThree">
       <h2 class="mb-0">
-        <button id="clothing_button" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"></button>
+        <button id="clothing_button" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" data-toggle="tooltip" data-placement="right" title="Click for more info"></button>
       </h2>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
@@ -114,9 +139,9 @@
   <br><br>
   <!-- Gear Suggestion -->
   <div class="card">
-    <div class="card-header" id="headingThree">
+    <div id="gear_card" class="card-header" id="headingThree">
       <h2 class="mb-0">
-        <button id="gear_button" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"></button>
+        <button id="gear_button" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" data-toggle="tooltip" data-placement="right" title="Click for more info"></button>
       </h2>
     </div>
     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
